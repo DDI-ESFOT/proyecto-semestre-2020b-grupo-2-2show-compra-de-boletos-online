@@ -1,0 +1,55 @@
+Consejos de Grandes programadores
+be curious, stay hungry stay foolish, learn what you want to know
+life with a purpose, drop out helped me to open my mind.
+sense of higher purpose, it when the dreams comes true.
+the ideas become clear when you start, no body knows when does everything begin
+
+1. investigar como integrar la base de datos a la pagina web
+2. verificar la base de datos
+6. investigar como funciona validaciones de usuario 
+kevin y vicente
+
+3. terminar el diseño de las paginas
+Kevin,Carlos, Elena 
+
+4. investigar como funciona el streaming y el acceso. competencia
+Elena, tecnologias, implemtacion, librerias
+
+5. investigar como funcion el protocolo tcp-ip
+
+7. interactividad de los post
+Carlos
+
+8. interactividad de la pagina- react
+Kevin B
+9. interactividad de la compra de boletos
+Kevin y Vicente
+
+
+investigacion
+kevin y vicente, act 1,2, 6 
+impletacion del front end
+validacion con firebase
+
+COSAS QUE DEBEMOS HACER
+Estudiar React, DOM
+preguntar profe sobre interaccion de base de datos relacional
+
+		Creacion de Mackups(html, bootstrap) dos semanas
+Vicente
+sing in, ingreso con google, usuarioperfil,Formulario, Rol, 
+
+Kevin
+Homepage, artista, UserStreamingScreenUser1, imagen1 a imagen9,
+
+Carlos
+administrador, imagen10 a imagen15, Supervisar, EventosDisponibles
+Elena
+ArtistaDesdeUsuario, Estadisticas Hasta Estado de Conexion
+
+Kevin B.
+
+Falta el Mockup
+Rediseño de Programar Evento (artista)
+Reservar EvENTO (USUARIO)
+Programar Anuncio (usuario)
