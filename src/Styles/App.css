@@ -214,7 +214,7 @@ hero
   background: url('../images/carucelfondo.jpg') no-repeat;
   background-position: 50% 50%;
   background-size: cover;
-  height: 100vh;
+  height: 50vh;
   margin-top: 80px;
   color: #d9d9d9 !important;
 }
