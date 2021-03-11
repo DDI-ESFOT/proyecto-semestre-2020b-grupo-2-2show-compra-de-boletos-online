@@ -1,25 +1,27 @@
-import logo from '../images/logo.svg';
+import React from 'react';
 import '../Styles/App.css';
+import 'antd/dist/antd.css';
+
+import ShowHeader from './Header';
+import ShowFooter from './Footer';
+import { Layout } from 'antd';
+import ShowHome from "../pages/home";
+const { Header, Content, Footer } = Layout;
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    return (
+        <Layout className="mainLayout">
+            <Header>
+                <ShowHeader/>
+            </Header>
+            <Content>
+                <ShowHome/>
+            </Content>
+            <Footer>
+                <ShowFooter/>
+            </Footer>
+        </Layout>
+    );
 }
 
 export default App;

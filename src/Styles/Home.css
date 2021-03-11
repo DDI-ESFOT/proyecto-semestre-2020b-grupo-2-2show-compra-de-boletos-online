@@ -1,0 +1,11 @@
+.ant-card{
+    width: 100%;
+    background-color: #f16c65;
+}
+.imagencard{
+    width: 70%;
+    height: 50%;
+    margin: 0 auto;
+    display: block;
+
+}
