@@ -1,7 +1,6 @@
 import React from 'react';
-import { Button } from 'antd';
-import { Carousel } from 'antd';
-import {DesktopOutlined } from '@ant-design/icons';
+import {Button, Carousel} from 'antd';
+import {DesktopOutlined} from '@ant-design/icons';
 
 const items = [
     {

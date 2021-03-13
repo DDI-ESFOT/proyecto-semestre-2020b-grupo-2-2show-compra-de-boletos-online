@@ -1,7 +1,7 @@
 import React from 'react';
-import {PlayCircleOutlined,TeamOutlined,ShoppingCartOutlined} from '@ant-design/icons';
+import {PlayCircleOutlined, ShoppingCartOutlined, TeamOutlined} from '@ant-design/icons';
 
-import { Row, Col } from 'antd';
+import {Col, Row} from 'antd';
 
 const items = [
     {

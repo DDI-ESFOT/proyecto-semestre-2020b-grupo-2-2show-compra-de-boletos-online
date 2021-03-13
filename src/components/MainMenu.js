@@ -1,12 +1,11 @@
 import React, {useState} from 'react';
 
-import {Anchor, Button, Drawer} from 'antd';
+import {Anchor, Button, Col, Drawer,Row} from 'antd';
 import {MenuUnfoldOutlined} from '@ant-design/icons';
 import Showlogo from "../images/showlogo-blanco.png";
-
+import {NavLink} from "react-router-dom";
 const { Link } = Anchor;
-
-function ShowHeader() {
+function MainMenu() {
     const [visible, setVisible] = useState(false);
 
     const showDrawer = () => {
@@ -21,20 +20,21 @@ function ShowHeader() {
         <div className="container-fluid">
             <div className="header">
                 <div className="logo">
-                    <a href="http://google.com"><img src={Showlogo} alt="logo" className="imagenlogo"/> </a>
+                    <a href="http://google.com"><img src={Showlogo} alt="logo" className="imagenlogo" /> </a>
                 </div>
                 <div className="mobileHidden">
                     <Anchor targetOffset="65">
-                        <Link to="/" title="Home"/>
-                        <Link to="/about" title="Nosotros"/>
-                        <Link to="/event" title="Eventos"/>
-                        <Link to="/ingresar" title="Ingresar"/>
-                        <Link to="/contact" title="Contactos"/>
+                        <NavLink to="/">Home</NavLink>
+                        <NavLink to="/about">Nosotros</NavLink>
+                        <NavLink to="/event">Eventos</NavLink>
+                        <NavLink to="/ingresar">Ingresar</NavLink>
+                        <NavLink to="/contact" >Contactos</NavLink>
                     </Anchor>
+
                 </div>
                 <div className="mobileVisible">
                     <Button type="primary" onClick={showDrawer}>
-                        <MenuUnfoldOutlined/>
+                        <MenuUnfoldOutlined />
                     </Button>
                     <Drawer
                         placement="right"
@@ -43,11 +43,11 @@ function ShowHeader() {
                         visible={visible}
                     >
                         <Anchor targetOffset="65">
-                            <Link to="/" title="Home"/>
-                            <Link to="/about" title="Nosotros"/>
-                            <Link to="/event" title="Eventos"/>
-                            <Link to="/ingresar" title="Ingresar"/>
-                            <Link to="/contact" title="Contactos"/>
+                            <NavLink to="/" >Home</NavLink>
+                            <NavLink to="/about" >Nosotros</NavLink>
+                            <NavLink to="/event" >Eventos</NavLink>
+                            <NavLink to="/ingresar">Ingresar</NavLink>
+                            <NavLink to="/contact">Contactos</NavLink>
                         </Anchor>
                     </Drawer>
                 </div>
@@ -55,4 +55,5 @@ function ShowHeader() {
         </div>
     );
 }
-export default ShowHeader;
+
+export default MainMenu;

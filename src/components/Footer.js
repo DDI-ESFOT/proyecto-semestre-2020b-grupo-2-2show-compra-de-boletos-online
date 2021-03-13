@@ -1,5 +1,5 @@
 import React from 'react';
-import {FacebookOutlined,InstagramOutlined} from '@ant-design/icons';
+import {FacebookOutlined, InstagramOutlined} from '@ant-design/icons';
 import Showlogo from "../images/showlogo.png";
 
 

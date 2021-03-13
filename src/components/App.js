@@ -1,26 +1,35 @@
-import React from 'react';
-import '../Styles/App.css';
+import React from "react";
 import 'antd/dist/antd.css';
-
-import ShowHeader from './Header';
-import ShowFooter from './Footer';
-import { Layout } from 'antd';
-import ShowHome from "../pages/home";
-const { Header, Content, Footer } = Layout;
+import '../Styles/App.css';
+import '../Styles/menu.css';
+import '../Styles/home.css';
+import '../Styles/fromevent.css';
+import { BrowserRouter as Router, Route, Switch} from "react-router-dom";
+import MainLayout from "./MainLayout";
+import EventPage from "../pages/EventPage";
+import AboutPage from "../pages/AboutPage";
+import HomePage from "../pages/HomePage";
 
 function App() {
     return (
-        <Layout className="mainLayout">
-            <Header>
-                <ShowHeader/>
-            </Header>
-            <Content>
-                <ShowHome/>
-            </Content>
-            <Footer>
-                <ShowFooter/>
-            </Footer>
-        </Layout>
+        <>
+            <Router>
+                <MainLayout >
+                    <Switch>
+
+                        <Route path="/about">
+                            <AboutPage/>
+                        </Route>
+                        <Route path="/event">
+                            <EventPage/>
+                        </Route>
+                        <Route path="/">
+                            <HomePage/>
+                        </Route>
+                    </Switch>
+                </MainLayout>
+            </Router>
+        </>
     );
 }
 
