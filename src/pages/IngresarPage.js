@@ -3,7 +3,7 @@ import React from "react";
 import { withRouter } from 'react-router-dom';
 import {auth, db} from '../components/Firebase'
 
-import { Form, Input, Button, Checkbox } from 'antd';
+import {Form, Input, Button, Checkbox, Radio, Space, DatePicker} from 'antd';
 
 const layout = {
     labelCol: { span: 8 },
@@ -12,6 +12,9 @@ const layout = {
 const tailLayout = {
     wrapperCol: { offset: 8, span: 16 },
 };
+
+
+
 
 
 
@@ -27,7 +30,12 @@ function IngregarPage(props){
     const [ciudad, setCiudad] = React.useState('');
     const [pais, setPais] = React.useState('');
     const [cuenta, setCuenta] = React.useState('')
+    const [value, setValue] = React.useState();
 
+    const onChangeRadio = e => {
+        console.log('radio checked', e.target.value);
+        setValue(e.target.value);
+    };
 
     function onChange(date, dateString) {
         console.log(date, dateString);
@@ -144,6 +152,7 @@ function IngregarPage(props){
 
 
 
+
     return(
         <div className="container-fluid">
             <h1>Disfruta 2Show</h1>
@@ -153,29 +162,104 @@ function IngregarPage(props){
                 initialValues={{ remember: true }}
                 onSubmit={procesarDatos}
             >
+                {
+                    error && (
+                        <div className="alert alert-danger mb-2">
+                            {error}
+                        </div>
+                    )
+                }
                 <Form.Item
                     label="Usuario"
-                    name="user"
-                    rules={[{ required: true, message: 'Por favor ingresa tu email!' }]}
-                    onChange ={e => setEmail(e.target.value)}
-                    value={email}
+                    name="user" rules={[{ required: true, message: 'Por favor ingresa tu email!' }]}
                 >
-                    <Input />
+                    <Input onChange={e => setEmail(e.target.value)} value={email} />
                 </Form.Item>
 
                 <Form.Item
                     label="Cotraseña"
                     name="password"
                     rules={[{ required: true, message: 'Ingresa tu contraseña!' }]}
-                    onChange ={e => setPass(e.target.value)}
-                    value={pass}
                 >
-                    <Input.Password />
+                    <Input.Password onChange ={e => setPass(e.target.value)} value={pass}/>
                 </Form.Item>
 
                 <Form.Item {...tailLayout} name="REcuerdame" valuePropName="checked">
                     <Checkbox>Remember me</Checkbox>
                 </Form.Item>
+                {
+                    esRegistro ?(
+                        <div>
+                            <Form.Item label="Nombre">
+                                <Input
+                                    type="text"
+                                    class="form-control mb-2"
+                                    placeholder="Escriba su Nombre"
+                                    onChange ={e => setNombre(e.target.value)}
+                                    value={nombre}
+                                />
+                            </Form.Item>
+                            <Form.Item label="Apellido">
+                                <Input
+                                    type="text"
+                                    class="form-control mb-2"
+                                    placeholder="Escriba su Apellido"
+                                    onChange ={e => setApellido(e.target.value)}
+                                    value={apellido}
+                                />
+                            </Form.Item>
+                            <Form.Item label="Ciudad">
+                                <Input
+                                    type="text"
+                                    class="form-control mb-2"
+                                    placeholder="Ciudad de Residencia"
+                                    onChange ={e => setCiudad(e.target.value)}
+                                    value={ciudad}
+                                />
+                            </Form.Item>
+                            <Form.Item label="País">
+                                <Input
+                                    type="text"
+                                    class="form-control mb-2"
+                                    placeholder="Pais de Origen"
+                                    onChange ={e => setPais(e.target.value)}
+                                    value={pais}
+                                />
+                            </Form.Item>
+                            <h3>Tipo de Cuenta</h3>
+                            <Form>
+                                <Radio.Group onChange={onChangeRadio} value={value}>
+                                    <Radio id='artista'  value={1}
+                                           onChange ={e =>
+                                           {
+                                               setCuenta('ART')
+                                               console.log('ART')
+                                           }
+                                           }
+                                    >Artista
+                                    </Radio>
+
+                                    <Radio id='usuario'  value={2}
+                                           onChange ={e =>
+                                           {
+                                               setCuenta('USR')
+                                               console.log('USR')
+                                           }
+                                           }
+
+                                    >Usuario
+                                    </Radio>
+                                </Radio.Group>
+                                <h3>Escriba la fecha de su nacimiento</h3>
+                                <Space direction="vertical">
+                                    <DatePicker onChange={onChange} type='date' />
+
+                                </Space>
+                            </Form>
+                        </div>
+
+                    ):null
+                }
 
                 <Form.Item {...tailLayout}>
                     <Button type="primary" htmlType="submit">

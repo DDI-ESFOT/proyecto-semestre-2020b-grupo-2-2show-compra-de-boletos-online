@@ -5,8 +5,12 @@ import {MenuUnfoldOutlined} from '@ant-design/icons';
 import Showlogo from "../images/showlogo-blanco.png";
 import {NavLink} from "react-router-dom";
 import Routes from "../constants/routes";
-const { Link } = Anchor;
-function MainMenu() {
+import { auth } from "../components/firebase";
+import { withRouter } from "react-router";
+
+
+
+function MainMenu(props) {
     const [visible, setVisible] = useState(false);
 
     const showDrawer = () => {
@@ -15,6 +19,12 @@ function MainMenu() {
 
     const onClose = () => {
         setVisible(false);
+    };
+
+    const cerrarSesion = () => {
+        auth.signOut().then(() => {
+            props.history.push("/ingresar");
+        });
     };
 
     return (
@@ -28,8 +38,17 @@ function MainMenu() {
                         <NavLink to={Routes.HOME}>Home</NavLink>
                         <NavLink to={Routes.ABOUT}>Nosotros</NavLink>
                         <NavLink to={Routes.EVENT}>Eventos</NavLink>
-                        <NavLink to={Routes.LOGIN}>Ingresar</NavLink>
                         <NavLink to={Routes.CONTACT} >Contactos</NavLink>
+                        <NavLink to={Routes.OTHERS} >Otros</NavLink>
+                        {props.firebaseUser !== null ? (
+                            <NavLink to={Routes.MYPROFILE} >Mi Perfil</NavLink>
+                        ):null}
+                        {props.firebaseUser !== null ? (
+                            <NavLink onClick={() => cerrarSesion()}>Log Out</NavLink>
+                        ):(
+                            <NavLink to={Routes.LOGIN}>Ingresar</NavLink>
+                        )}
+                        <NavLink to={Routes.CREATEEVENTS} >Crear Evento</NavLink>
                     </Anchor>
 
                 </div>
@@ -47,8 +66,17 @@ function MainMenu() {
                             <NavLink to={Routes.HOME}>Home</NavLink>
                             <NavLink to={Routes.ABOUT}>Nosotros</NavLink>
                             <NavLink to={Routes.EVENT}>Eventos</NavLink>
-                            <NavLink to={Routes.LOGIN}>Ingresar</NavLink>
                             <NavLink to={Routes.CONTACT} >Contactos</NavLink>
+                            <NavLink to={Routes.OTHERS} >Otros</NavLink>
+                            {props.firebaseUser !== null ? (
+                                <NavLink to={Routes.MYPROFILE} >Mi Perfil</NavLink>
+                            ):null}
+                            {props.firebaseUser !== null ? (
+                                <NavLink onClick={() => cerrarSesion()}>Log Out</NavLink>
+                            ):(
+                                <NavLink to={Routes.LOGIN}>Ingresar</NavLink>
+                            )}
+                            <NavLink to={Routes.CREATEEVENTS} >Crear Evento</NavLink>
                         </Anchor>
                     </Drawer>
                 </div>
@@ -57,4 +85,4 @@ function MainMenu() {
     );
 }
 
-export default MainMenu;
+export default withRouter(MainMenu);

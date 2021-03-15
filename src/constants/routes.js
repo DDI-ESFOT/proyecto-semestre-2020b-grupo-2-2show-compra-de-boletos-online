@@ -3,7 +3,10 @@ const Routes ={
     ABOUT:"/about",
     LOGIN:"/login",
     EVENT:"/events",
-    CONTACT:"/contact"
+    CONTACT:"/contact",
+    OTHERS:"/others",
+    MYPROFILE:"/myprofile",
+    CREATEEVENTS:"/createevents"
 
 };
 
