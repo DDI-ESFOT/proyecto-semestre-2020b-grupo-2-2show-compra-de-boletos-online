@@ -1,6 +1,6 @@
 
 /*
-hero
+home
 ----
 */
 #home{
@@ -65,6 +65,7 @@ hero
     margin: 0 10px 0 0;
 }
 
+
 /*
 block
 -----
@@ -72,6 +73,7 @@ block
 .block {
     padding: 60px 0;
     border-bottom: 1px solid #d9d9d9;
+    background-color: #bdbcba;
 }
 
 /*
@@ -143,7 +145,7 @@ how it works
 }
 
 /*
-faqs
+EventPage
 ----
 */
 .faqBlock .ant-collapse {
@@ -159,7 +161,9 @@ faqs
 .faqBlock .fas {
     margin: 0 10px 0 0;
 }
-
+.ant-card-body{
+    background-color: #929395;
+}
 /*
 pricing block
 -------------

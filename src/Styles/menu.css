@@ -36,18 +36,20 @@ header
     background: none;
 }
 .ant-drawer-content{
-    background-color: #bdbcba;
+    background-color: #2e364c;
 }
 .ant-drawer-content .ant-anchor{
-    background-color: #bdbcba;
+    background-color: #2e364c;
     display: grid;
 }
 .ant-drawer-content .ant-anchor a{
     padding: 7px 0 7px 16px;
+    color:white;
 }
 
 .header .ant-anchor-wrapper .ant-anchor a{
     padding: 7px 16px 7px 16px;
+    color:white;
 }
 
 .header .ant-anchor {

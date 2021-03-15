@@ -16,7 +16,6 @@ function App() {
             <Router>
                 <MainLayout >
                     <Switch>
-
                         <Route path="/about">
                             <AboutPage/>
                         </Route>

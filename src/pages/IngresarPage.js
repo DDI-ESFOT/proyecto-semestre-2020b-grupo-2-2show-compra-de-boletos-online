@@ -10,7 +10,6 @@ const tailLayout = {
 };
 
 
-
 function IngregarPage(){
 
     return(
