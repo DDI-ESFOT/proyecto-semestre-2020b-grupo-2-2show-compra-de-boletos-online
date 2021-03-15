@@ -7,7 +7,7 @@ import { Menu, Row, Col, Input, Image, Button, Card } from "antd";
 import {
   CameraOutlined,
   UploadOutlined,
-  EditOutlined,
+  EditOutlined,HeartOutlined
 } from "@ant-design/icons";
 
 //importar iconos
@@ -27,6 +27,7 @@ function MyProfile(props) {
   const [videoPost, setVideoPost] = useState("");
   //lista de posts
   const [listaPost, setListaPost] = useState([]); ///es un arreglo , iniciar asi
+  const [likesPost, setLikesPost] = useState(0)
 
   //funcion para obtener los datos de la base de datos
   React.useEffect(() => {
@@ -231,6 +232,13 @@ function MyProfile(props) {
                   cover={<img alt="example" src={post.imgPost} />}
                 >
                   <Meta title={post.fechaPost} description={post.textoPost} />
+                  <p>Likes {post.likesPost}</p>
+                  <HeartOutlined 
+                  onClick= {()=> {
+                   setLikesPost(post.likesPost + 1)
+                   console.log('click')
+                  }}
+                  />
                 </Card>
               );
             })}
@@ -267,7 +275,7 @@ function MyProfile(props) {
               </div>
               <Button className="botonReservar">Reservar</Button>
             </div>
-            <Button type="primary" href="/crearEvento" className="btn btn-dark">
+            <Button type="primary" href="/crearEvento" className="botonReusable">
               Crear Evento
             </Button>
           </div>
@@ -285,6 +293,9 @@ function MyProfile(props) {
 
           <div className="Bloque">
             <h1>Anuncios</h1>
+            <Button type="primary" href="/crearAnuncio" className="botonReusable">
+              Crear Anuncio
+            </Button>
           </div>
         </Col>
       </Row>

@@ -25,13 +25,15 @@ const FormularioEventos = (props) => {
   const [costoGolden, setCostoGolden] = useState("");
   const [descripEvento, setDescripEvento] = useState("");
   const [entradasDisp, setEntradasDisp] = useState("");
-  const [fechaCreacion, setFechaCreacion] = useState("");
   const [fechaProgramada, setFechaProgramada] = useState("");
   const [horaProgramada, setHoraProgramada] = useState("");
   const [goldenDisp, setGoldenDisp] = useState("");
   const [nomEvento, setNomEvento] = useState("");
   const [urlEvento, setUrlEvento] = useState("");
   const [videoEvento, setVideoEvento] = useState("");
+  const [nomPremio, setNomPremio] = useState("");
+  const [descripPremio, setDescripPremio] = useState("");
+  const [imgPremio, setImgPremio] = useState("");
 
   //funcion para subir el evento a la base de datos
 
@@ -51,9 +53,16 @@ const FormularioEventos = (props) => {
         bannerEvento: "",
         videoEvento: "",
         uid:props.infoUser.uid, 
+        descripEvento: descripEvento,
 
         //creacion del evento
         fechaCreacion: hoy.toDateString(),
+        nomPremio: nomPremio,
+        descripPremio: descripPremio,
+        imgPremio: '',
+        uidGanador: '',
+        imgGanador: '',
+        nomGanador: '',
       });
       setNomEvento("");
       setEntradasDisp("");
@@ -64,6 +73,7 @@ const FormularioEventos = (props) => {
       setGoldenDisp("");
       setBannerEvento("");
       setVideoEvento("");
+      setDescripEvento("");
       alert('Evento creado!')
       //limpiar estados
     } catch (error) {
@@ -85,6 +95,11 @@ const FormularioEventos = (props) => {
     if (!nomEvento.trim()) {
    
       alert("Ingrese el nombre del evento");
+      return;
+    }
+    if (!descripEvento.trim()) {
+   
+      alert("Ingrese la descripcion del Evento");
       return;
     }
     if (!entradasDisp.trim()) {
@@ -126,14 +141,21 @@ const FormularioEventos = (props) => {
       alert("Ingrese un valor NUMÉRICO en Pases Gold Disponibles");
       return;
     }
+    if (!nomPremio.trim()) {
+   
+      alert("Ingrese el nombre del Premio");
+      return;
+    }
+    if (!descripPremio.trim()) {
+   
+      alert("Ingrese la descripcion del Premio");
+      return;
+    }
 
     subirEvento();
   };
 
   const onFinish = (values) => {
-    console.log("Success:", values);
-    console.log(nomEvento);
-    console.log(urlEvento);
     procesarDatos();
   };
 
@@ -165,6 +187,14 @@ const FormularioEventos = (props) => {
             value={nomEvento}
           />
         </Form.Item>
+        <Form.Item label="Descripción del Evento" required>
+        <Input.TextArea 
+        onChange={(e) => setDescripEvento(e.target.value)}
+        value={descripEvento}
+        />
+        </Form.Item>
+
+        
         <Form.Item label="Hora del Evento">
           <TimePicker />
         </Form.Item>
@@ -231,6 +261,30 @@ const FormularioEventos = (props) => {
           />
         </Form.Item>
 
+        <h2>Escriba la informacion del Premio a Sortear</h2>
+        <Form.Item label="Nombre del Premio" required>
+          <Input
+            onChange={(e) => setNomPremio(e.target.value)}
+            value={nomPremio}
+          />
+        </Form.Item>
+        <Form.Item label="Descripción del Premio" required>
+        <Input.TextArea 
+        onChange={(e) => setDescripPremio(e.target.value)}
+        value={descripPremio}
+        />
+        </Form.Item>
+        <Form.Item
+          name="uploadImgPremio"
+          label="Foto del Premio"
+          valuePropName="fileList"
+          //getValueFromEvent={normFile}
+        >
+          <Upload name="videoEvento" action="/upload.do" listType="picture">
+            <Button icon={<UploadOutlined />}>Click para subir</Button>
+          </Upload>
+        </Form.Item> 
+        
         <Form.Item>
           <Button type="primary" htmlType="submit">
             Crear Evento
@@ -246,6 +300,7 @@ const FormularioEventos = (props) => {
       >
         Vista Previa
       </Button>
+      
     </>
   );
 };
