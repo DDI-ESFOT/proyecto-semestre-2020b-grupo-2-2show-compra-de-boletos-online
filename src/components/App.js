@@ -8,6 +8,7 @@ import MainLayout from "./MainLayout";
 import EventPage from "../pages/EventsPage";
 import AboutPage from "../pages/AboutPage";
 import HomePage from "../pages/HomePage";
+import IngregarPage from "../pages/IngresarPage";
 
 function App() {
     return (
@@ -21,6 +22,9 @@ function App() {
                         </Route>
                         <Route path="/event">
                             <EventPage/>
+                        </Route>
+                        <Route path="/login">
+                            <IngregarPage/>
                         </Route>
                         <Route path="/">
                             <HomePage/>

@@ -27,7 +27,7 @@ function MainMenu() {
                         <NavLink to="/">Home</NavLink>
                         <NavLink to="/about">Nosotros</NavLink>
                         <NavLink to="/event">Eventos</NavLink>
-                        <NavLink to="/ingresar">Ingresar</NavLink>
+                        <NavLink to="/login">Ingresar</NavLink>
                         <NavLink to="/contact" >Contactos</NavLink>
                     </Anchor>
 
@@ -46,7 +46,7 @@ function MainMenu() {
                             <NavLink to="/" >Home</NavLink>
                             <NavLink to="/about" >Nosotros</NavLink>
                             <NavLink to="/event" >Eventos</NavLink>
-                            <NavLink to="/ingresar">Ingresar</NavLink>
+                            <NavLink to="/login">Ingresar</NavLink>
                             <NavLink to="/contact">Contactos</NavLink>
                         </Anchor>
                     </Drawer>
