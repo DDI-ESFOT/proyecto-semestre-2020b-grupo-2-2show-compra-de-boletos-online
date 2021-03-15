@@ -225,4 +225,6 @@
     margin: 0 auto;
     width: 80%;
 }
-
+.img-circle{
+    border-radius: 150px;
+}

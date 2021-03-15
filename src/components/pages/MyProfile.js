@@ -28,9 +28,6 @@ function MyProfile(props) {
   //lista de posts
   const [listaPost, setListaPost] = useState([]); ///es un arreglo , iniciar asi
 
-
-
-
   //funcion para obtener los datos de la base de datos
   React.useEffect(() => {
     if (auth.currentUser) {
@@ -47,7 +44,9 @@ function MyProfile(props) {
           }));
           //console.log(arrayDatos); //con esto almaceno el array de la informacion de los usuario
 
-          const filtrado = arrayDatos.filter((dato) => dato.uid === props.firebaseUser.uid); //esto hago para solo coger el objeto con cohincida con los datos del usuario loggeado
+          const filtrado = arrayDatos.filter(
+            (dato) => dato.uid === props.firebaseUser.uid
+          ); //esto hago para solo coger el objeto con cohincida con los datos del usuario loggeado
 
           setInfoUser(filtrado[0]); //asigno el objeto al usuario
           //console.log(infoUser);
@@ -69,12 +68,12 @@ function MyProfile(props) {
     const obtenerPost = async () => {
       try {
         const posts = await db.collection("posts").get();
-        const arrayPost =  posts.docs.map((doc) => ({ 
+        const arrayPost = posts.docs.map((doc) => ({
           id: doc.id,
           ...doc.data(),
         }));
 
-        const filteredListPost =  arrayPost.filter(
+        const filteredListPost = arrayPost.filter(
           (dat) => dat.uidUser === props.firebaseUser.uid
         );
         setListaPost(filteredListPost);
@@ -92,10 +91,12 @@ function MyProfile(props) {
   //funcion para subir el post
   const subirPost = async (e) => {
     try {
+      const tiempoTranscurrido = Date.now();
+      const hoy = new Date(tiempoTranscurrido);
       const data = await db.collection("posts").add({
         textoPost: textoPost,
         imgPost: imgPost,
-        fechaPost: Date.now(),
+        fechaPost: hoy.toDateString(),
         videoPost: videoPost,
         likesPost: 0,
         uidUser: infoUser.uid,
@@ -124,7 +125,7 @@ function MyProfile(props) {
 
   return (
     <div>
-      <div id="banner" style={{backgroundImage: `url(${infoUser.banner})`}}>
+      <div id="banner" style={{ backgroundImage: `url(${infoUser.banner})` }}>
         <h1>
           {" "}
           {infoUser.nombre} {infoUser.apellido}
@@ -136,7 +137,7 @@ function MyProfile(props) {
           width={250}
           height={250}
           preview={false}
-          className='img-circle'
+          className="img-circle"
         />
         <Image
           className="editFoto"
@@ -154,10 +155,7 @@ function MyProfile(props) {
         />
       </div>
 
-      <Row
-        id="contenido"
-        
-      >
+      <Row id="contenido">
         <Col className="BloqueI" xs={24} sm={24} md={7} lg={7} xl={7}>
           <div className="Bloque">
             <h1>Informacion Personal</h1>
@@ -198,7 +196,6 @@ function MyProfile(props) {
                   value={textoPost}
                 />
                 <div id="iconos">
-                  
                   <UploadOutlined
                     style={{ fontSize: "35px", color: "#fff" }}
                     onClick={() => {
@@ -225,72 +222,18 @@ function MyProfile(props) {
             </div>
           </div>
           <div id="viewPost">
-            
-            {
-              listaPost.map(
-                  (post) => {
-                    return (
-                      <Card
-              className="postN"
-              hoverable
-              style={{ width: "80%" }}
-              cover={
-                <img
-                  alt="example"
-                  src={post.imgPost}
-                />
-              }
-            >
-              <Meta title={post.fechaPost} description={post.textoPost} />
-            </Card>
-                    )
-
-                  }
-
-              )
-            }
-            
-            <Card
-              className="postN"
-              hoverable
-              style={{ width: "80%" }}
-              cover={
-                <img
-                  alt="example"
-                  src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png"
-                />
-              }
-            >
-              <Meta title="2021-02-22" description="Un dia en la naturaleza" />
-            </Card>
-
-            <Card
-              className="postN"
-              hoverable
-              style={{ width: "80%" }}
-              cover={
-                <img
-                  alt="example"
-                  src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png"
-                />
-              }
-            >
-              <Meta title="2021-02-22" description="Un dia en la naturaleza" />
-            </Card>
-
-            <Card
-              className="postN"
-              hoverable
-              style={{ width: "80%" }}
-              cover={
-                <img
-                  alt="example"
-                  src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png"
-                />
-              }
-            >
-              <Meta title="2021-02-22" description="Un dia en la naturaleza" />
-            </Card>
+            {listaPost.map((post) => {
+              return (
+                <Card
+                  className="postN"
+                  hoverable
+                  style={{ width: "80%" }}
+                  cover={<img alt="example" src={post.imgPost} />}
+                >
+                  <Meta title={post.fechaPost} description={post.textoPost} />
+                </Card>
+              );
+            })}
           </div>
         </Col>
 

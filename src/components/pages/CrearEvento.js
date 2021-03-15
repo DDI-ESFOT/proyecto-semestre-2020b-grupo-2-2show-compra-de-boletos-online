@@ -47,15 +47,9 @@ export default function CrearEvento(props) {
       };
       obtenerDatos();
     } else {
-      console.log("no existe un usuario");
-      //redirigir al usuario al login
-      props.history.push("/ingresar");
+      
     }
   }, [props.history, infoUser.uid]);
-
-  
-
-  
 
   return (
     <div>
@@ -71,6 +65,7 @@ export default function CrearEvento(props) {
           width={250}
           height={250}
           preview={false}
+          className='img-circle'
         />
         <Image
           className="editFoto"
@@ -94,22 +89,16 @@ export default function CrearEvento(props) {
             <h1>Crear Eventos</h1>
           </div>
 
-          <FormularioEventos />
+          
 
 
 
           </Col>
           <Col xs={24} sm={24} md={8} lg={8} xl={8} className="seccionBoton">
-          
-            <Button
-            onClick={()=> {
-              console.log('ir a vista previa')
-            }}
-           className='botonReusable'
             
-            >
-            Vista Previa
-            </Button>
+          <FormularioEventos infoUser={infoUser} />
+           
+            
             
          
           </Col>
