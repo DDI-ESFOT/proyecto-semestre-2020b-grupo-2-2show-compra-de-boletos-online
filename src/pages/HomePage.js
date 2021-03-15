@@ -9,7 +9,6 @@ function HomePage() {
             <ShowCarusel/>
             <Show/>
             <ShowAbout/>
-
         </div>
     );
 }

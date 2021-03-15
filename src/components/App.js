@@ -2,11 +2,10 @@ import React from "react";
 import 'antd/dist/antd.css';
 import '../Styles/App.css';
 import '../Styles/menu.css';
-import '../Styles/home.css';
-import '../Styles/fromevent.css';
+import '../Styles/HomePage.css';
 import { BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import MainLayout from "./MainLayout";
-import EventPage from "../pages/EventPage";
+import EventPage from "../pages/EventsPage";
 import AboutPage from "../pages/AboutPage";
 import HomePage from "../pages/HomePage";
 

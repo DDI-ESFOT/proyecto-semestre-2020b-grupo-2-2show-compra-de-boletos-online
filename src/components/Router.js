@@ -3,7 +3,7 @@ import {auth} from "./Firebase";
 import {BrowserRouter as Router, Switch} from "react-router-dom";
 import ShowHeader from "./MainMenu";
 import ShowAbout from "./home/About";
-import ShowEvent from "../pages/EventPage";
+import ShowEvent from "../pages/EventsPage";
 
 function ShowRouter(){
     //usuario de la consola
