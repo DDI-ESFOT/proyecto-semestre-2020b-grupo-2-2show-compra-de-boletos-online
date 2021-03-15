@@ -43,6 +43,9 @@ function ShowEvents(){
                             <p>Card content</p>
                             <p>Card content</p>
                             <p>Card content</p>
+                            <Button type="primary" htmlType="submit">
+                                Comprar evento
+                            </Button>
                         </Card>
                     </Col>
                     <Col xs={{ span: 24 }} sm={{ span: 12 }} md={{ span: 8 }}>
@@ -54,6 +57,9 @@ function ShowEvents(){
                             <p>Card content</p>
                             <p>Card content</p>
                             <p>Card content</p>
+                            <Button type="primary" htmlType="submit">
+                                Comprar evento
+                            </Button>
                         </Card>
                     </Col>
                     <Col xs={{ span: 24 }} sm={{ span: 12 }} md={{ span: 8 }}>
@@ -65,6 +71,9 @@ function ShowEvents(){
                             <p>Card content</p>
                             <p>Card content</p>
                             <p>Card content</p>
+                            <Button type="primary" htmlType="submit">
+                                Comprar evento
+                            </Button>
                         </Card>
                     </Col>
                     <Col xs={{ span: 24 }} sm={{ span: 12 }} md={{ span: 8 }}>
@@ -76,6 +85,9 @@ function ShowEvents(){
                             <p>Card content</p>
                             <p>Card content</p>
                             <p>Card content</p>
+                            <Button type="primary" htmlType="submit">
+                                Comprar evento
+                            </Button>
                         </Card>
                     </Col>
                     <Col xs={{ span: 24 }} sm={{ span: 12 }} md={{ span: 8 }}>
@@ -87,6 +99,9 @@ function ShowEvents(){
                             <p>Card content</p>
                             <p>Card content</p>
                             <p>Card content</p>
+                            <Button type="primary" htmlType="submit">
+                                Comprar evento
+                            </Button>
                         </Card>
                     </Col>
                 </Row>
