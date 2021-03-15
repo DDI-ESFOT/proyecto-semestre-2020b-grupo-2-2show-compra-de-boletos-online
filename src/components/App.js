@@ -9,6 +9,7 @@ import EventPage from "../pages/EventsPage";
 import AboutPage from "../pages/AboutPage";
 import HomePage from "../pages/HomePage";
 import IngregarPage from "../pages/IngresarPage";
+import NotFoundPage from "../pages/NotFoundPage";
 
 function App() {
     return (
@@ -16,17 +17,20 @@ function App() {
             <Router>
                 <MainLayout >
                     <Switch>
+                        <Route path="/" exact={true}>
+                            <HomePage/>
+                        </Route>
                         <Route path="/about">
                             <AboutPage/>
                         </Route>
-                        <Route path="/event">
+                        <Route path="/events">
                             <EventPage/>
                         </Route>
                         <Route path="/login">
                             <IngregarPage/>
                         </Route>
-                        <Route path="/">
-                            <HomePage/>
+                        <Route >
+                            <NotFoundPage/>
                         </Route>
                     </Switch>
                 </MainLayout>

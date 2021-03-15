@@ -4,6 +4,7 @@ import {Anchor, Button, Col, Drawer,Row} from 'antd';
 import {MenuUnfoldOutlined} from '@ant-design/icons';
 import Showlogo from "../images/showlogo-blanco.png";
 import {NavLink} from "react-router-dom";
+import Routes from "../constants/routes";
 const { Link } = Anchor;
 function MainMenu() {
     const [visible, setVisible] = useState(false);
@@ -20,15 +21,15 @@ function MainMenu() {
         <div className="container-fluid">
             <div className="header">
                 <div className="logo">
-                    <a href="http://google.com"><img src={Showlogo} alt="logo" className="imagenlogo" /> </a>
+                    <NavLink to={Routes.HOME}><img src={Showlogo} alt="logo" className="imagenlogo" /> </NavLink>
                 </div>
                 <div className="mobileHidden">
                     <Anchor targetOffset="65">
-                        <NavLink to="/">Home</NavLink>
-                        <NavLink to="/about">Nosotros</NavLink>
-                        <NavLink to="/event">Eventos</NavLink>
-                        <NavLink to="/login">Ingresar</NavLink>
-                        <NavLink to="/contact" >Contactos</NavLink>
+                        <NavLink to={Routes.HOME}>Home</NavLink>
+                        <NavLink to={Routes.ABOUT}>Nosotros</NavLink>
+                        <NavLink to={Routes.EVENT}>Eventos</NavLink>
+                        <NavLink to={Routes.LOGIN}>Ingresar</NavLink>
+                        <NavLink to={Routes.CONTACT} >Contactos</NavLink>
                     </Anchor>
 
                 </div>
@@ -43,11 +44,11 @@ function MainMenu() {
                         visible={visible}
                     >
                         <Anchor targetOffset="65">
-                            <NavLink to="/" >Home</NavLink>
-                            <NavLink to="/about" >Nosotros</NavLink>
-                            <NavLink to="/event" >Eventos</NavLink>
-                            <NavLink to="/login">Ingresar</NavLink>
-                            <NavLink to="/contact">Contactos</NavLink>
+                            <NavLink to={Routes.HOME}>Home</NavLink>
+                            <NavLink to={Routes.ABOUT}>Nosotros</NavLink>
+                            <NavLink to={Routes.EVENT}>Eventos</NavLink>
+                            <NavLink to={Routes.LOGIN}>Ingresar</NavLink>
+                            <NavLink to={Routes.CONTACT} >Contactos</NavLink>
                         </Anchor>
                     </Drawer>
                 </div>

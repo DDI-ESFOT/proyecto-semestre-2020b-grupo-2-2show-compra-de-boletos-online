@@ -11,8 +11,8 @@ function ShowFooter() {
                     <img src={Showlogo} alt="logo" className="imagenlogo"/>
                 </div>
                 <ul className="socials">
-                    <li><a href="https://www.facebook.com/"><FacebookOutlined /> </a></li>
-                    <li><a href="https://www.twitter.com/"><InstagramOutlined /></a></li>
+                    <li><a href="https://www.facebook.com/" target="_blank" rel="noreferrer noopener"><FacebookOutlined /> </a></li>
+                    <li><a href="https://www.instagram.com/" target="_blank" rel="noreferrer noopener"><InstagramOutlined /></a></li>
                 </ul>
                 <div className="copyright">Copyright &copy; 2021 2Show</div>
 
