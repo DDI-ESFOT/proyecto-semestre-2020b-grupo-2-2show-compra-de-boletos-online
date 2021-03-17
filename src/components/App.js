@@ -5,7 +5,7 @@ import "../Styles/menu.css";
 import "../Styles/HomePage.css";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Routers from "../constants/routes";
-import { auth } from "./Firebase";
+import { auth } from "../firebase/index";
 
 import MainLayout from "./MainLayout";
 import EventPage from "../pages/EventsPage";
@@ -36,9 +36,6 @@ function App() {
       <Router>
         <MainLayout>
           <Switch>
-            <Route path={Routers.HOME} exact={true}>
-              <HomePage />
-            </Route>
             <Route path={Routers.ABOUT}>
               <AboutPage />
             </Route>
@@ -48,13 +45,15 @@ function App() {
             <Route path={Routers.LOGIN}>
               <IngregarPage />
             </Route>
-            <Router path={Routers.OTHERS}></Router>
             <Router path={Routers.MYPROFILE}>
               <MyProfilePage firebaseUser={firebaseUser} />
             </Router>
             <Router path={Routers.CREATEEVENTS}>
               <CreateEventPage firebaseUser={firebaseUser} />
             </Router>
+            <Route path={Routers.HOME} exact="true">
+              <HomePage />
+            </Route>
             <Route>
               <NotFoundPage />
             </Route>

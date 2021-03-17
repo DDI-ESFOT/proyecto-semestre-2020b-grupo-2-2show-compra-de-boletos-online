@@ -10,26 +10,9 @@ import image6 from "../images/imagenF.jpg";
 
 import { Row, Col, Button } from "antd";
 import { Card } from "antd";
-import { db } from "./Firebase";
-import { Link } from "react-router-dom";
-import Routes from "../constants/routes";
 const { Meta } = Card;
 
 function ShowEvents() {
-  const [event, setEvent] = useState([]);
-
-  useEffect(() => {
-    const getEvents = async () => {
-      try {
-        const events = await db.collection("eventos").get();
-        setEvent(event);
-        console.log("Events", event);
-        return;
-      } catch (error) {}
-    };
-    getEvents();
-  }, []);
-
   return (
     <div id="feature" className="block featureBlock bgGray">
       <div className="container-fluid">
@@ -38,29 +21,6 @@ function ShowEvents() {
           <p>La mejor música con los mejores artistas en vivo desde tu casa!</p>
         </div>
         <Row gutter={[16, 16]}>
-          /*
-          {event.map((event, index) => {
-            return (
-              <Col
-                key={event.id}
-                xs={{ span: 24 }}
-                sm={{ span: 12 }}
-                md={{ span: 8 }}
-              >
-                <Card hoverable cover={<img alt="Test" src={image3} />}>
-                  <Meta>{event.nomEvento}</Meta>
-                  <p>{event.descripEvento}</p>
-                  <p>{event.fechaCreacion}</p>
-                  <p>{event.costoEntrada}</p>
-                  <p>{event.costoGolden}</p>
-                  <Button type="primary">
-                    <Link to={Routes.EVENT}>Comprar Entradas</Link>
-                  </Button>
-                </Card>
-              </Col>
-            );
-          })}
-          */
           <Col xs={{ span: 24 }} sm={{ span: 12 }} md={{ span: 8 }}>
             <Card hoverable cover={<img alt="Test" src={image1} />}>
               <Meta title="Easy to customise" />

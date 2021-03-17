@@ -80,12 +80,7 @@ block
 about
 -----
 */
-#show{
-    background-color: #bdbcba !important;
-}
-#about{
-    background-color: #bdbcba !important;
-}
+
 .aboutBlock .contentHolder {
     text-align: center;
     margin: 0 0 50px;

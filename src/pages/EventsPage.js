@@ -1,6 +1,6 @@
 import React from "react";
 import { useEffect } from "react";
-import { db } from "../components/Firebase";
+import { db } from "../firebase";
 
 import ShowEvent from "../components/ShowEvent";
 import CarucelEvents from "../components/events/CarucelEvents";

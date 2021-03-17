@@ -9,7 +9,7 @@
 
 #banner {
     height: 350px;
-    background: url('../images/music2.jpg')no-repeat;
+    background-image: url('../images/music2.jpg');
     justify-content: center;
     margin: 0 auto;
    align-items: center;
@@ -225,4 +225,6 @@
     margin: 0 auto;
     width: 80%;
 }
-
+.img-circle{
+    border-radius: 150px;
+}

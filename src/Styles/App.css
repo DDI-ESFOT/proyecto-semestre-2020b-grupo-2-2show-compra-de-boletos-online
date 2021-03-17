@@ -24,8 +24,9 @@ body {
   min-height: 100vh;
 }
 
-.ant-layout-content{
+.ant-layout-content {
   margin-top: 100px;
+  background-color: #bdbcba !important;
 }
 
 .mainLayout .ant-layout-header {
@@ -134,6 +135,19 @@ footer
 
 .mobileHidden {
   display: block;
+}
+/*
+Ingresar Page
+*/
+
+.alertlogin{
+  color: firebrick!important;
+  margin: 0 auto;
+  text-align: center;
+  margin-bottom: 10px;
+}
+.titulologin{
+  text-align: center;
 }
 
 /*
