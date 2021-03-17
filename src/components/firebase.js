@@ -1,5 +1,6 @@
 import app from 'firebase';
 import 'firebase/firestore';
+import 'firebase/storage';
 import 'firebase/auth';
 
 
@@ -21,8 +22,11 @@ import 'firebase/auth';
   const db = app.firestore();
   //tener todos los metodos para hacer la autenticacion de los usuarios
   const auth = app.auth();
+  //esto es para usar el almacenamiento de la aplicación
+  const storage = app.storage();
+  
 
-  export {db,auth}
+  export {db,auth, storage}
 
 
   

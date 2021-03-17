@@ -66,22 +66,20 @@ function MyProfile(props) {
 
   React.useEffect(() => {
     //cargo la coleccion de posts
-    const obtenerPost = async () => {
+    console.log('uid', props.firebaseUser.uid)
+    const obtenerPost = () => {
       try {
-        const posts = await db.collection("posts").get();
-        const arrayPost = posts.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        }));
-
-        const filteredListPost = arrayPost.filter(
-          (dat) => dat.uidUser === props.firebaseUser.uid
-        );
-        setListaPost(filteredListPost);
-
-        console.log("filtrada");
-        console.log(listaPost);
-        return;
+        db.collection("posts").where('uidUser', '==', props.firebaseUser.uid).onSnapshot((querySnapshot) => {
+          const posts = [];
+          querySnapshot.forEach((doc) => {
+              posts.push({
+                id: doc.id,
+                ...doc.data(),
+              });
+          });
+          console.log("Current POSTS: ", posts.join(", "));
+        setListaPost(posts);
+      });
       } catch (error) {}
     };
     obtenerPost();
@@ -123,6 +121,17 @@ function MyProfile(props) {
 
     //aqui vamos a registrar al nuevo usuario en firebase
   };
+
+  const  handleLike = async (postId, likes)=> {
+    //setLikesPost(post.likesPost + 1)
+
+    console.log('click', postId, likes)
+    await db.collection("posts").doc(postId).update({
+      likesPost: likes  + 1
+    })
+    //guardar base de datos
+    //
+   }
 
   return (
     <div>
@@ -225,7 +234,7 @@ function MyProfile(props) {
           <div id="viewPost">
             {listaPost.map((post) => {
               return (
-                <Card
+                <Card key={post.id}
                   className="postN"
                   hoverable
                   style={{ width: "80%" }}
@@ -234,10 +243,7 @@ function MyProfile(props) {
                   <Meta title={post.fechaPost} description={post.textoPost} />
                   <p>Likes {post.likesPost}</p>
                   <HeartOutlined 
-                  onClick= {()=> {
-                   setLikesPost(post.likesPost + 1)
-                   console.log('click')
-                  }}
+                  onClick= {()=>handleLike(post.id, post.likesPost)}
                   />
                 </Card>
               );
