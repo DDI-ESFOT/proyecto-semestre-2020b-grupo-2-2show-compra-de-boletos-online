@@ -2,17 +2,18 @@ import React, { useState } from "react";
 import { auth, db } from "../firebase";
 import { withRouter } from "react-router";
 import "../../css/myProfile.css";
+import Post from '../Post'
 //importo Ant para poder usar sus componentes
-import { Menu, Row, Col, Input, Image, Button, Card } from "antd";
+import {  Row, Col, Input, Image, Button, Card} from "antd";
 import {
-  CameraOutlined,
   UploadOutlined,
-  EditOutlined,HeartOutlined
+  HeartOutlined,
 } from "@ant-design/icons";
 
 //importar iconos
 import iconoEditar from "../../images/editar.png";
 import iconoEditar2 from "../../images/editar.png";
+import Form from "antd/lib/form/Form";
 
 function MyProfile(props) {
   //state del usuario vigente, el autenticado
@@ -27,7 +28,7 @@ function MyProfile(props) {
   const [videoPost, setVideoPost] = useState("");
   //lista de posts
   const [listaPost, setListaPost] = useState([]); ///es un arreglo , iniciar asi
-  const [likesPost, setLikesPost] = useState(0)
+  const [likesPost, setLikesPost] = useState(0);
 
   //funcion para obtener los datos de la base de datos
   React.useEffect(() => {
@@ -66,20 +67,22 @@ function MyProfile(props) {
 
   React.useEffect(() => {
     //cargo la coleccion de posts
-    console.log('uid', props.firebaseUser.uid)
+    console.log("uid", props.firebaseUser.uid);
     const obtenerPost = () => {
       try {
-        db.collection("posts").where('uidUser', '==', props.firebaseUser.uid).onSnapshot((querySnapshot) => {
-          const posts = [];
-          querySnapshot.forEach((doc) => {
+        db.collection("posts")
+          .where("uidUser", "==", props.firebaseUser.uid)
+          .onSnapshot((querySnapshot) => {
+            const posts = [];
+            querySnapshot.forEach((doc) => {
               posts.push({
                 id: doc.id,
                 ...doc.data(),
               });
+            });
+            console.log("Current POSTS: ", posts.join(", "));
+            setListaPost(posts);
           });
-          console.log("Current POSTS: ", posts.join(", "));
-        setListaPost(posts);
-      });
       } catch (error) {}
     };
     obtenerPost();
@@ -122,16 +125,19 @@ function MyProfile(props) {
     //aqui vamos a registrar al nuevo usuario en firebase
   };
 
-  const  handleLike = async (postId, likes)=> {
+  const handleLike = async (postId, likes) => {
     //setLikesPost(post.likesPost + 1)
 
-    console.log('click', postId, likes)
-    await db.collection("posts").doc(postId).update({
-      likesPost: likes  + 1
-    })
+    console.log("click", postId, likes);
+    await db
+      .collection("posts")
+      .doc(postId)
+      .update({
+        likesPost: likes + 1,
+      });
     //guardar base de datos
     //
-   }
+  };
 
   return (
     <div>
@@ -197,6 +203,8 @@ function MyProfile(props) {
         <Col className="BloqueIII" xs={24} sm={24} md={24} lg={10} xl={8}>
           <div id="postBloque">
             <div id="post">
+              
+
               <form onSubmit={procesarDatos}>
                 <Input
                   id="inputPost"
@@ -212,18 +220,8 @@ function MyProfile(props) {
                       console.log("aqui va la funcion para subir multimedia");
                     }}
                   />
-                  <CameraOutlined
-                    style={{ fontSize: "35px", color: "#fff" }}
-                    onClick={() => {
-                      console.log("aqui va la funcion para activar la camara");
-                    }}
-                  />
-                  <EditOutlined
-                    style={{ fontSize: "35px", color: "#fff" }}
-                    onClick={() => {
-                      console.log("aqui va la funcion para editar multimedia");
-                    }}
-                  />
+                
+                  
                   <button id="btnPostear" type="submit">
                     Postear
                   </button>
@@ -231,10 +229,12 @@ function MyProfile(props) {
               </form>
             </div>
           </div>
+          
           <div id="viewPost">
             {listaPost.map((post) => {
               return (
-                <Card key={post.id}
+                <Card
+                  key={post.id}
                   className="postN"
                   hoverable
                   style={{ width: "80%" }}
@@ -242,8 +242,8 @@ function MyProfile(props) {
                 >
                   <Meta title={post.fechaPost} description={post.textoPost} />
                   <p>Likes {post.likesPost}</p>
-                  <HeartOutlined 
-                  onClick= {()=>handleLike(post.id, post.likesPost)}
+                  <HeartOutlined
+                    onClick={() => handleLike(post.id, post.likesPost)}
                   />
                 </Card>
               );
@@ -281,7 +281,11 @@ function MyProfile(props) {
               </div>
               <Button className="botonReservar">Reservar</Button>
             </div>
-            <Button type="primary" href="/crearEvento" className="botonReusable">
+            <Button
+              type="primary"
+              href="/crearEvento"
+              className="botonReusable"
+            >
               Crear Evento
             </Button>
           </div>
@@ -299,7 +303,11 @@ function MyProfile(props) {
 
           <div className="Bloque">
             <h1>Anuncios</h1>
-            <Button type="primary" href="/crearAnuncio" className="botonReusable">
+            <Button
+              type="primary"
+              href="/crearAnuncio"
+              className="botonReusable"
+            >
               Crear Anuncio
             </Button>
           </div>

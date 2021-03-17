@@ -77,7 +77,7 @@ const FormularioEventos = (props) => {
      videoEvento: videoEvento,
       uid: props.infoUser.uid,
       descripEvento: descripEvento,
-      fechaProgramada: fechaProgramada._d,
+      //fechaProgramada: fechaProgramada._d,
      
 
       //creacion del evento

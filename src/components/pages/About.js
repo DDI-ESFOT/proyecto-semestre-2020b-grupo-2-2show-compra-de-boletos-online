@@ -1,9 +1,12 @@
 import React from 'react'
+import EventoEnVivo from './EventoEnVivo';
+
 
 export default function About() {
     return (
         <div>
-            <h1>About 2Show</h1>
+           
+            <EventoEnVivo />
         </div>
     )
 }
