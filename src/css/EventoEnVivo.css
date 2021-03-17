@@ -47,7 +47,7 @@
     margin-left:5px;
     margin-right: 5px;
     text-align: center;
-    width: 50%;
+    width: 20%;
     padding: 10px;
     opacity: 50%;
     
@@ -61,4 +61,10 @@
     border: white;
     background-color: black;
     color: white;
+}
+.btnEvent:hover{
+    border: black;
+    background-color: white;
+    color: black;
+    margin: 10px;
 }
