@@ -15,7 +15,9 @@ import { UploadOutlined } from "@ant-design/icons";
 
 const FormularioEventos = (props) => {
   const [componentSize, setComponentSize] = useState("default");
-  const [user, setUser] = React.useState(null);
+  const [user, setUser] = useState(null);
+
+  const [loading, setLoading] = useState(false)
 
   //states de los campos a ingresar en el formulario
   const [bannerEvento, setBannerEvento] = useState("");
@@ -24,8 +26,8 @@ const FormularioEventos = (props) => {
   const [costoGolden, setCostoGolden] = useState("");
   const [descripEvento, setDescripEvento] = useState("");
   const [entradasDisp, setEntradasDisp] = useState("");
-  const [fechaProgramada, setFechaProgramada] = useState({});
-  const [horaProgramada, setHoraProgramada] = useState({});
+  const [fechaProgramada, setFechaProgramada] = useState('');
+  const [horaProgramada, setHoraProgramada] = useState('');
   const [goldenDisp, setGoldenDisp] = useState("");
   const [nomEvento, setNomEvento] = useState("");
   const [urlEvento, setUrlEvento] = useState("");
@@ -36,59 +38,7 @@ const FormularioEventos = (props) => {
 
   //funcion para subir el evento a la base de datos
 
-  const subirEvento = async (e) => {
-    try {
-      const tiempoTranscurrido = Date.now();
-      const hoy = new Date(tiempoTranscurrido);
-
-      await db.collection("eventos").add({
-        nomEvento: nomEvento,
-        entradasDisp: entradasDisp,
-        costoEntrada: costoEntrada,
-        costoDonacion: costoDonacion,
-        urlEvento: urlEvento,
-        costoGolden: costoGolden,
-        goldenDisp: goldenDisp,
-       // bannerEvento: bannerEvento,
-       // videoEvento: videoEvento,
-        uid: props.infoUser.uid,
-        descripEvento: descripEvento,
-        fechaProgramada: fechaProgramada.toDateString(),
-        horaProgramada: horaProgramada,
-
-        //creacion del evento
-        fechaCreacion: hoy.toDateString(),
-        nomPremio: nomPremio,
-        descripPremio: descripPremio,
-       // imgPremio: imgPremio,
-        uidGanador: '',
-        imgGanador: '',
-        nomGanador: "",
-      });
-      setNomEvento("");
-      setEntradasDisp("");
-      setCostoEntrada("");
-      setCostoDonacion("");
-      setUrlEvento("");
-      setCostoGolden("");
-      setGoldenDisp("");
-      setBannerEvento("");
-      setVideoEvento("");
-      setDescripEvento("");
-      alert("Evento creado!");
-      //limpiar estados
-    } catch (error) {
-      console.log("no se pudo subir el evento!");
-    }
-  };
-
-  function is_numeric(value) {
-    if (value < 0) {
-      alert("El formulario contiene valores negativos no permitidos!");
-      return;
-    }
-    return !isNaN(parseFloat(value)) && isFinite(value);
-  }
+ 
 
   const registrar = async (data) => {
 
@@ -105,7 +55,7 @@ const FormularioEventos = (props) => {
      setBannerEvento( await bannerURL);
      console.log('BANNER',bannerEvento);
      setFechaProgramada(await data.fechaEvento);
-     console.log('fecha', fechaProgramada);
+     console.log('fecha', fechaProgramada._d);
      setHoraProgramada( await data.horaEvento);
      console.log('hora', horaProgramada);
      setImgPremio( imgPremioURL);
@@ -113,6 +63,7 @@ const FormularioEventos = (props) => {
     
     const tiempoTranscurrido = Date.now();
     const hoy = new Date(tiempoTranscurrido);
+   
 
     await db.collection("eventos").add({
       nomEvento: nomEvento,
@@ -126,8 +77,8 @@ const FormularioEventos = (props) => {
      videoEvento: videoEvento,
       uid: props.infoUser.uid,
       descripEvento: descripEvento,
-      //fechaProgramada: fechaProgramada,
-     // horaProgramada: horaProgramada,
+      fechaProgramada: fechaProgramada._d,
+     
 
       //creacion del evento
       fechaCreacion: hoy,
@@ -139,12 +90,14 @@ const FormularioEventos = (props) => {
       nomGanador: "",
     });
 
+    
 
 
      
   };
 
   const onFinish = async (data) => {
+    setLoading(true);
     console.log('valores',data)
     console.log(data.fechaEvento)
    await registrar(
@@ -152,6 +105,10 @@ const FormularioEventos = (props) => {
       uploadVideoEvento: data.uploadVideoEvento[0].originFileObj,
     uploadImgPremio: data.uploadImgPremio[0].originFileObj,}
     );
+    setLoading(false);
+    alert('Evento Creado!');
+    
+    
   };
 
   const onFinishFailed = (errorInfo) => {
@@ -315,7 +272,9 @@ const FormularioEventos = (props) => {
         </Form.Item>
 
         <Form.Item>
-          <Button type="primary" htmlType="submit">
+          <Button type="primary" htmlType="submit"
+          loading={loading}
+          >
             Crear Evento
           </Button>
         </Form.Item>
