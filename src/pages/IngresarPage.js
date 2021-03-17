@@ -1,7 +1,7 @@
 import React from "react";
 
 import { withRouter } from 'react-router-dom';
-import {auth, db} from '../components/Firebase'
+import {auth, db} from '../components/Firebase';
 
 import {Form, Input, Button, Checkbox, Radio, Space, DatePicker} from 'antd';
 
@@ -156,6 +156,12 @@ function IngregarPage(props){
     return(
         <div className="container-fluid">
             <h1>Disfruta 2Show</h1>
+            <h3 className='text-center'>
+                {
+                    esRegistro ? 'Registrar Usuario' : 'Ingresar'
+                }
+            </h3>
+            <hr></hr>
             <Form
                 {...layout}
                 name="basic"
@@ -173,7 +179,11 @@ function IngregarPage(props){
                     label="Usuario"
                     name="user" rules={[{ required: true, message: 'Por favor ingresa tu email!' }]}
                 >
-                    <Input onChange={e => setEmail(e.target.value)} value={email} />
+                    <Input type="email"
+                           class="form-control mb-2"
+                           placeholder="Ingrese su email"
+                           onChange ={e => setEmail(e.target.value)}
+                           value={email}/>
                 </Form.Item>
 
                 <Form.Item
@@ -181,7 +191,11 @@ function IngregarPage(props){
                     name="password"
                     rules={[{ required: true, message: 'Ingresa tu contraseña!' }]}
                 >
-                    <Input.Password onChange ={e => setPass(e.target.value)} value={pass}/>
+                    <Input.Password
+                        class="form-control mb-2"
+                        placeholder="Ingrese su contraseña"
+                        onChange ={e => setPass(e.target.value)}
+                        value={pass}/>
                 </Form.Item>
 
                 <Form.Item {...tailLayout} name="REcuerdame" valuePropName="checked">
@@ -262,10 +276,10 @@ function IngregarPage(props){
                 }
 
                 <Form.Item {...tailLayout}>
-                    <Button type="primary" htmlType="submit">
+                    <Button Type="submit">
                         {esRegistro ? 'Registrar Usuario' : 'Ingresar'}
                     </Button>
-                    <Button htmlType="button" onClick={()=> setEsRegistro(!esRegistro)}>
+                    <Button Type="button" onClick={()=> setEsRegistro(!esRegistro)}>
                         {esRegistro ? '¿Ya estas registrado?' : '¿No tienes cuenta?'}
                     </Button>
                 </Form.Item>

@@ -5,7 +5,7 @@ import {MenuUnfoldOutlined} from '@ant-design/icons';
 import Showlogo from "../images/showlogo-blanco.png";
 import {NavLink} from "react-router-dom";
 import Routes from "../constants/routes";
-import { auth } from "../components/firebase";
+import { auth } from "./Firebase";
 import { withRouter } from "react-router";
 
 
@@ -23,7 +23,7 @@ function MainMenu(props) {
 
     const cerrarSesion = () => {
         auth.signOut().then(() => {
-            props.history.push("/ingresar");
+            props.history.push("/login");
         });
     };
 
@@ -38,13 +38,11 @@ function MainMenu(props) {
                         <NavLink to={Routes.HOME}>Home</NavLink>
                         <NavLink to={Routes.ABOUT}>Nosotros</NavLink>
                         <NavLink to={Routes.EVENT}>Eventos</NavLink>
-                        <NavLink to={Routes.CONTACT} >Contactos</NavLink>
-                        <NavLink to={Routes.OTHERS} >Otros</NavLink>
                         {props.firebaseUser !== null ? (
                             <NavLink to={Routes.MYPROFILE} >Mi Perfil</NavLink>
                         ):null}
                         {props.firebaseUser !== null ? (
-                            <NavLink onClick={() => cerrarSesion()}>Log Out</NavLink>
+                            <button onClick={() => cerrarSesion()}>Salir</button>
                         ):(
                             <NavLink to={Routes.LOGIN}>Ingresar</NavLink>
                         )}
@@ -66,13 +64,11 @@ function MainMenu(props) {
                             <NavLink to={Routes.HOME}>Home</NavLink>
                             <NavLink to={Routes.ABOUT}>Nosotros</NavLink>
                             <NavLink to={Routes.EVENT}>Eventos</NavLink>
-                            <NavLink to={Routes.CONTACT} >Contactos</NavLink>
-                            <NavLink to={Routes.OTHERS} >Otros</NavLink>
                             {props.firebaseUser !== null ? (
                                 <NavLink to={Routes.MYPROFILE} >Mi Perfil</NavLink>
                             ):null}
                             {props.firebaseUser !== null ? (
-                                <NavLink onClick={() => cerrarSesion()}>Log Out</NavLink>
+                                <button onClick={() => cerrarSesion()}>Log Out</button>
                             ):(
                                 <NavLink to={Routes.LOGIN}>Ingresar</NavLink>
                             )}

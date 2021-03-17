@@ -9,7 +9,7 @@
 
 #banner {
     height: 350px;
-    background-image: url('../images/music2.jpg');
+    background: url('../images/music2.jpg')no-repeat;
     justify-content: center;
     margin: 0 auto;
    align-items: center;
