@@ -2,18 +2,17 @@ import React, { useState } from "react";
 import { auth, db } from "../firebase";
 import { withRouter } from "react-router";
 import "../../css/myProfile.css";
-import Post from '../Post'
+import Post from "../Post";
 //importo Ant para poder usar sus componentes
-import {  Row, Col, Input, Image, Button, Card} from "antd";
-import {
-  UploadOutlined,
-  HeartOutlined,
-} from "@ant-design/icons";
+import { Row, Col, Input, Image, Button, Card, Modal } from "antd";
+import { UploadOutlined, HeartOutlined } from "@ant-design/icons";
 
 //importar iconos
 import iconoEditar from "../../images/editar.png";
 import iconoEditar2 from "../../images/editar.png";
 import Form from "antd/lib/form/Form";
+//import evento en vivo
+import  EventoEnVivo from './EventoEnVivo'
 
 function MyProfile(props) {
   //state del usuario vigente, el autenticado
@@ -88,34 +87,31 @@ function MyProfile(props) {
     obtenerPost();
   }, []);
 
-//obtener evento pagados
-const [eventosPagados, setEventosPagados] = React.useState([]);
-React.useEffect(() => {
-  //cargo la coleccion de posts
-  
-  const obtenerEventosPagados = () => {
-    try {
-      db.collection("eventosPagados")
-        .where("uid", "==", props.firebaseUser.uid)
-        .onSnapshot((querySnapshot) => {
-          const eventosPagados = [];
-          querySnapshot.forEach((doc) => {
-            eventosPagados.push({
-              id: doc.id,
-              ...doc.data(),
+  //obtener evento pagados
+  const [eventosPagados, setEventosPagados] = React.useState([]);
+  React.useEffect(() => {
+    //cargo la coleccion de posts
+
+    const obtenerEventosPagados = () => {
+      try {
+        db.collection("eventosPagados")
+          .where("uid", "==", props.firebaseUser.uid)
+          .onSnapshot((querySnapshot) => {
+            const eventosPagados = [];
+            querySnapshot.forEach((doc) => {
+              eventosPagados.push({
+                id: doc.id,
+                ...doc.data(),
+              });
             });
+            console.log("Current Eventos Pagados: ", eventosPagados.join(", "));
+            console.log("Current Eventos Pagados: ", eventosPagados);
+            setEventosPagados(eventosPagados);
           });
-          console.log("Current Eventos Pagados: ", eventosPagados.join(", "));
-          console.log("Current Eventos Pagados: ", eventosPagados);
-          setEventosPagados(eventosPagados);
-        });
-    } catch (error) {}
-  };
-  obtenerEventosPagados();
-}, []);
-
-
-
+      } catch (error) {}
+    };
+    obtenerEventosPagados();
+  }, []);
 
   const { Meta } = Card;
 
@@ -168,9 +164,31 @@ React.useEffect(() => {
     //
   };
 
+  //modal para ver el evento
+  const [isModalVisible, setIsModalVisible] = useState(false);
+
+  const showModal = () => {
+    setIsModalVisible(true);
+  };
+
+  const handleOk = () => {
+    setIsModalVisible(false);
+  };
+
+  const handleCancel = () => {
+    setIsModalVisible(false);
+  };
+
   return (
     <div>
-      <div id="banner" style={{ backgroundImage: `url(${infoUser.banner})`, backgroundSize:"cover", backgroundRepeat:"no-repeat" }}>
+      <div
+        id="banner"
+        style={{
+          backgroundImage: `url(${infoUser.banner})`,
+          backgroundSize: "cover",
+          backgroundRepeat: "no-repeat",
+        }}
+      >
         <h1>
           {" "}
           {infoUser.nombre} {infoUser.apellido}
@@ -232,8 +250,6 @@ React.useEffect(() => {
         <Col className="BloqueIII" xs={24} sm={24} md={24} lg={10} xl={8}>
           <div id="postBloque">
             <div id="post">
-              
-
               <form onSubmit={procesarDatos}>
                 <Input
                   id="inputPost"
@@ -249,8 +265,7 @@ React.useEffect(() => {
                       console.log("aqui va la funcion para subir multimedia");
                     }}
                   />
-                
-                  
+
                   <button id="btnPostear" type="submit">
                     Postear
                   </button>
@@ -258,7 +273,7 @@ React.useEffect(() => {
               </form>
             </div>
           </div>
-          
+
           <div id="viewPost">
             {listaPost.map((post) => {
               return (
@@ -288,23 +303,33 @@ React.useEffect(() => {
           <div className="eventoBloque">
             <div className="Evento">
               <div>
-                {
-                  eventosPagados.map(
-                    (eventoPagado)=> {
-                      return (
+                {eventosPagados.map((eventoPagado) => {
+                  return (
+                    <div>
+                      <p>{eventoPagado.nomEvento}</p>
+                      <p>{eventoPagado.fechaEvento}</p>
+                      <Button className="botonReservar" onClick={showModal}>
+                        Ingresar
+                      </Button>
+
+                      <Modal
+                        
+                        visible={isModalVisible}
+                        onOk={handleOk}
+                        onCancel={handleCancel}
+                        footer ={null}
+                        width="100%"
+                        height="100%"
+                      >
                         <div>
-                        <p>{eventoPagado.nomEvento}</p>
-                        <p>{eventoPagado.fechaEvento}</p> 
-                        <Button className="botonReservar" 
-                        href="/about"
-                        >Ingresar</Button>
+                        <EventoEnVivo />
                         </div>
-                      )
-                    }
-                  )
-                }
+                        
+                      </Modal>
+                    </div>
+                  );
+                })}
               </div>
-              
             </div>
           </div>
 
@@ -340,8 +365,6 @@ React.useEffect(() => {
               <Button className="botonReservar">Reservar</Button>
             </div>
           </div>
-
-          
         </Col>
       </Row>
       <div></div>

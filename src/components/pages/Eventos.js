@@ -1,14 +1,14 @@
 import React, { useState } from "react";
-import { Card, Button, Modal } from "antd";
-import { db, auth } from "../firebase";
+import { Card, } from "antd";
+import { db,  } from "../firebase";
 import ComprarEntrada from "./comprarEntrada";
-import { UploadOutlined, HeartOutlined } from "@ant-design/icons";
+
 
 const { Meta } = Card;
 
 export default function Eventos() {
   //state del usuario vigente, el autenticado
-  const [user, setUser] = React.useState(null);
+ 
   //esto es para que un usuario ingrese a MyProfile usando sus credenciales de acceso
 
   const [eventos, setEventos] = useState([
@@ -128,54 +128,3 @@ export default function Eventos() {
   );
 }
 
-/*revisar este codigo
-{
-            eventos.map(
-
-                (event) => (
-                    <Card
-                        hoverable
-                        style={{ width: 240 }}
-                        cover={<img alt="example" src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png" />}
-                    >
-                        <Meta title={event.nomEvento} description={event.fechaProgramada} />
-                        
-                    </Card>
-                )
-            ) 
-        } */
-
-/* 
-        {
-        
-          eventos.map((evento) => {
-            return (
-              <Card
-                key={evento.id}
-                //className="postN"
-                hoverable
-                style={{ width: "80%" }}
-                cover={<img alt="example" src={evento.bannerEvento} />}
-              >
-                <Meta
-                  title={evento.fechaCreacion}
-                  description={evento.descripEvento}
-                />
-                <p> Costo Entrada: {evento.costoEntrada}</p>
-                <Button type="primary" onClick={showModal()}>
-                  Comprar Entrada
-                </Button>
-                <Modal
-                  title="Comprar Entrada"
-                  visible={isModalVisible}
-                  onOk={handleOk}
-                  onCancel={handleCancel}
-                >
-                  <p>Some contents...</p>
-                  <p>Some contents...</p>
-                  <p>Some contents...</p>
-                </Modal>
-              </Card>
-            );
-          })}
-*/
