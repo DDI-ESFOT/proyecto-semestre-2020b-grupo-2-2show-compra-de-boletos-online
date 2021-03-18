@@ -1,19 +1,19 @@
 import React, { useState } from "react";
 import { auth, db } from "../firebase";
 import { withRouter } from "react-router";
-
-import { Menu, Row, Col, Input, Image, Button, Card } from "antd";
-import {
-  CameraOutlined,
-  UploadOutlined,
-  EditOutlined,
-} from "@ant-design/icons";
-
 import "../Styles/myProfile.css";
+//importo Ant para poder usar sus componentes
+import { Row, Col, Input, Image, Button, Card } from "antd";
+
+import Post from "../components/Post";
 
 //importar iconos
-import iconoEditar from "../images/editar.png";
-import iconoEditar2 from "../images/editar.png";
+import {
+  UploadOutlined,
+  EditOutlined,
+  HeartOutlined,
+  FormOutlined,
+} from "@ant-design/icons";
 
 function MyProfilePage(props) {
   //state del usuario vigente, el autenticado
@@ -28,6 +28,7 @@ function MyProfilePage(props) {
   const [videoPost, setVideoPost] = useState("");
   //lista de posts
   const [listaPost, setListaPost] = useState([]); ///es un arreglo , iniciar asi
+  const [likesPost, setLikesPost] = useState(0);
 
   //funcion para obtener los datos de la base de datos
   React.useEffect(() => {
@@ -66,22 +67,22 @@ function MyProfilePage(props) {
 
   React.useEffect(() => {
     //cargo la coleccion de posts
-    const obtenerPost = async () => {
+    console.log("uid", props.firebaseUser.uid);
+    const obtenerPost = () => {
       try {
-        const posts = await db.collection("posts").get();
-        const arrayPost = posts.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        }));
-
-        const filteredListPost = arrayPost.filter(
-          (dat) => dat.uidUser === props.firebaseUser.uid
-        );
-        setListaPost(filteredListPost);
-
-        console.log("filtrada");
-        console.log(listaPost);
-        return;
+        db.collection("posts")
+          .where("uidUser", "==", props.firebaseUser.uid)
+          .onSnapshot((querySnapshot) => {
+            const posts = [];
+            querySnapshot.forEach((doc) => {
+              posts.push({
+                id: doc.id,
+                ...doc.data(),
+              });
+            });
+            console.log("Current POSTS: ", posts.join(", "));
+            setListaPost(posts);
+          });
       } catch (error) {}
     };
     obtenerPost();
@@ -92,10 +93,12 @@ function MyProfilePage(props) {
   //funcion para subir el post
   const subirPost = async (e) => {
     try {
+      const tiempoTranscurrido = Date.now();
+      const hoy = new Date(tiempoTranscurrido);
       const data = await db.collection("posts").add({
         textoPost: textoPost,
         imgPost: imgPost,
-        fechaPost: Date.now(),
+        fechaPost: hoy.toDateString(),
         videoPost: videoPost,
         likesPost: 0,
         uidUser: infoUser.uid,
@@ -122,9 +125,30 @@ function MyProfilePage(props) {
     //aqui vamos a registrar al nuevo usuario en firebase
   };
 
+  const handleLike = async (postId, likes) => {
+    //setLikesPost(post.likesPost + 1)
+
+    console.log("click", postId, likes);
+    await db
+      .collection("posts")
+      .doc(postId)
+      .update({
+        likesPost: likes + 1,
+      });
+    //guardar base de datos
+    //
+  };
+
   return (
     <div>
-      <div id="banner" style={{ backgroundImage: `url(${infoUser.banner})` }}>
+      <div
+        id="banner"
+        style={{
+          backgroundImage: `url(${infoUser.banner})`,
+          backgroundSize: "cover",
+          backgroundRepeat: "no-repeat",
+        }}
+      >
         <h1>
           {" "}
           {infoUser.nombre} {infoUser.apellido}
@@ -138,20 +162,12 @@ function MyProfilePage(props) {
           preview={false}
           className="img-circle"
         />
-        <Image
-          className="editFoto"
-          src={iconoEditar}
-          width={50}
-          height={50}
-          preview={false}
-        />
-        <Image
-          className="editFotoB"
-          src={iconoEditar2}
-          width={50}
-          height={50}
-          preview={false}
-        />
+        <div className="editFoto">
+          <FormOutlined style={{ fontSize: "30x", color: "red" }} />
+        </div>
+        <div className="editFotoB">
+          <EditOutlined style={{ fontSize: "25px", color: "red" }} />
+        </div>
       </div>
 
       <Row id="contenido">
@@ -159,6 +175,7 @@ function MyProfilePage(props) {
           <div className="Bloque">
             <h1>Informacion Personal</h1>
           </div>
+
           <div className="informacionBloque">
             <div className="informacion">
               <h2 className="item">
@@ -181,6 +198,7 @@ function MyProfilePage(props) {
             </div>
           </div>
         </Col>
+
         <Col className="BloqueIII" xs={24} sm={24} md={24} lg={10} xl={8}>
           <div id="postBloque">
             <div id="post">
@@ -199,18 +217,7 @@ function MyProfilePage(props) {
                       console.log("aqui va la funcion para subir multimedia");
                     }}
                   />
-                  <CameraOutlined
-                    style={{ fontSize: "35px", color: "#fff" }}
-                    onClick={() => {
-                      console.log("aqui va la funcion para activar la camara");
-                    }}
-                  />
-                  <EditOutlined
-                    style={{ fontSize: "35px", color: "#fff" }}
-                    onClick={() => {
-                      console.log("aqui va la funcion para editar multimedia");
-                    }}
-                  />
+
                   <button id="btnPostear" type="submit">
                     Postear
                   </button>
@@ -218,61 +225,25 @@ function MyProfilePage(props) {
               </form>
             </div>
           </div>
+
           <div id="viewPost">
             {listaPost.map((post) => {
               return (
                 <Card
+                  key={post.id}
                   className="postN"
                   hoverable
                   style={{ width: "80%" }}
                   cover={<img alt="example" src={post.imgPost} />}
                 >
                   <Meta title={post.fechaPost} description={post.textoPost} />
+                  <p>Likes {post.likesPost}</p>
+                  <HeartOutlined
+                    onClick={() => handleLike(post.id, post.likesPost)}
+                  />
                 </Card>
               );
             })}
-
-            <Card
-              className="postN"
-              hoverable
-              style={{ width: "80%" }}
-              cover={
-                <img
-                  alt="example"
-                  src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png"
-                />
-              }
-            >
-              <Meta title="2021-02-22" description="Un dia en la naturaleza" />
-            </Card>
-
-            <Card
-              className="postN"
-              hoverable
-              style={{ width: "80%" }}
-              cover={
-                <img
-                  alt="example"
-                  src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png"
-                />
-              }
-            >
-              <Meta title="2021-02-22" description="Un dia en la naturaleza" />
-            </Card>
-
-            <Card
-              className="postN"
-              hoverable
-              style={{ width: "80%" }}
-              cover={
-                <img
-                  alt="example"
-                  src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png"
-                />
-              }
-            >
-              <Meta title="2021-02-22" description="Un dia en la naturaleza" />
-            </Card>
           </div>
         </Col>
 
@@ -306,7 +277,11 @@ function MyProfilePage(props) {
               </div>
               <Button className="botonReservar">Reservar</Button>
             </div>
-            <Button type="primary" href="/crearEvento" className="btn btn-dark">
+            <Button
+              type="primary"
+              href="/crearEvento"
+              className="botonReusable"
+            >
               Crear Evento
             </Button>
           </div>

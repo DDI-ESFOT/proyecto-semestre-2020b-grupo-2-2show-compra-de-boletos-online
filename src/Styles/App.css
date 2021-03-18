@@ -150,6 +150,26 @@ Ingresar Page
   text-align: center;
 }
 
+/*Spinner*/
+.containerspidder{
+  text-align: center;
+  height: 1000px;
+}
+.ant-spin-nested-loading {
+  height: 100%;
+}
+.ant-alert-with-description.ant-alert-no-icon {
+  color:firebrick!important;
+  height: 100%;
+}
+.ant-alert-with-description .ant-alert-message{
+  color:red;
+  margin-top: 100px;
+}
+.ant-spin-blur{
+  height: 100%;
+}
+
 /*
 responsive
 ----------

@@ -6,13 +6,20 @@
     text-align: center;
     align-content: center;
     font-size: 25px;
-   
+    margin: 0 auto;
+    align-self: center;
     margin: 0 auto;
 }
 .seccionBoton {
-    display: flex;
+  
+
     height: 400px;
-    align-items: center;
+    margin-top: 20px;
     text-align: center;
    
+    margin-bottom: 20px
+   
+}
+.img-circle{
+    border-radius: 150px;
 }

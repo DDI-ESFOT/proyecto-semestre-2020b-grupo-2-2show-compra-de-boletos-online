@@ -4,6 +4,7 @@ import "../Styles/App.css";
 import "../Styles/menu.css";
 import "../Styles/HomePage.css";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { Spin, Alert } from "antd";
 import Routers from "../constants/routes";
 import { auth } from "../firebase/index";
 
@@ -62,8 +63,14 @@ function App() {
       </Router>
     </>
   ) : (
-    <div>
-      <p> Cargando...</p>
+    <div className="containerspidder">
+      <Spin tip="Cargando ...">
+        <Alert
+          message="2Show"
+          description="La mejor App de Strimmig."
+          type="info"
+        />
+      </Spin>
     </div>
   );
 }
