@@ -88,6 +88,35 @@ function MyProfile(props) {
     obtenerPost();
   }, []);
 
+//obtener evento pagados
+const [eventosPagados, setEventosPagados] = React.useState([]);
+React.useEffect(() => {
+  //cargo la coleccion de posts
+  
+  const obtenerEventosPagados = () => {
+    try {
+      db.collection("eventosPagados")
+        .where("uid", "==", props.firebaseUser.uid)
+        .onSnapshot((querySnapshot) => {
+          const eventosPagados = [];
+          querySnapshot.forEach((doc) => {
+            eventosPagados.push({
+              id: doc.id,
+              ...doc.data(),
+            });
+          });
+          console.log("Current Eventos Pagados: ", eventosPagados.join(", "));
+          console.log("Current Eventos Pagados: ", eventosPagados);
+          setEventosPagados(eventosPagados);
+        });
+    } catch (error) {}
+  };
+  obtenerEventosPagados();
+}, []);
+
+
+
+
   const { Meta } = Card;
 
   //funcion para subir el post
@@ -259,12 +288,23 @@ function MyProfile(props) {
           <div className="eventoBloque">
             <div className="Evento">
               <div>
-                <p>
-                  {" "}
-                  <b>Shakira </b> Sábado 9 pm{" "}
-                </p>
+                {
+                  eventosPagados.map(
+                    (eventoPagado)=> {
+                      return (
+                        <div>
+                        <p>{eventoPagado.nomEvento}</p>
+                        <p>{eventoPagado.fechaEvento}</p> 
+                        <Button className="botonReservar" 
+                        href="/about"
+                        >Ingresar</Button>
+                        </div>
+                      )
+                    }
+                  )
+                }
               </div>
-              <Button className="botonReservar">Ingresar</Button>
+              
             </div>
           </div>
 
@@ -301,16 +341,7 @@ function MyProfile(props) {
             </div>
           </div>
 
-          <div className="Bloque">
-            <h1>Anuncios</h1>
-            <Button
-              type="primary"
-              href="/crearAnuncio"
-              className="botonReusable"
-            >
-              Crear Anuncio
-            </Button>
-          </div>
+          
         </Col>
       </Row>
       <div></div>

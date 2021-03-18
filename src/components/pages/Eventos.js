@@ -11,38 +11,48 @@ export default function Eventos() {
   const [user, setUser] = React.useState(null);
   //esto es para que un usuario ingrese a MyProfile usando sus credenciales de acceso
 
+  const [eventos, setEventos] = useState([
+    {
+      nomEvento: "Medardo y sus Players",
+      fechaProgramada: "2021 Abril 18 20:00",
+      bannerEvento:
+        "https://i.pinimg.com/564x/97/c1/6d/97c16d195994553453f3c72098b0ccb4.jpg",
+    },
+    {
+      nomEvento: "Shakira",
+      fechaProgramada: "2021 Mayo 5 20:00",
+      bannerEvento:
+        "https://i.pinimg.com/564x/97/c1/6d/97c16d195994553453f3c72098b0ccb4.jpg",
+    },
+  ]);
 
-  const [eventos, setEventos] = useState([]);
-
+  const [listaEventos, setListaEventos] = useState('');
 
   React.useEffect(() => {
-    if (auth.currentUser) {
-      console.log("Existe un usuario");
-      setUser(auth.currentUser); //toda la informacion del usuario autenticado
-     
-      const obtenerDatos = async () => {
-        try {
-          const data = await db.collection("eventos").get(); 
-          const arrayEventos = await data.docs.map((doc) => ({
-            id: doc.id,
-            ...doc.data(),
-          }));
+    //cargo la coleccion de posts
+    const obtenerEventos = async() => {
+      try {
+       await db.collection("eventos")
+          .onSnapshot((querySnapshot) => {
+            const eventList = [];
+            querySnapshot.forEach((doc) => {
+              eventList.push({
+                id: doc.id,
+                ...doc.data(),
+              });
+            });
+            console.log("Current EVENTS: ", eventList.join(", "));
+            setListaEventos(eventList);
+            console.log(listaEventos)
+          });
+      } catch (error) {}
+    };
+    obtenerEventos();
+  }, []);
 
-          setEventos( await arrayEventos); //aqui tengo todos los eventos
-          console.log('eventos',eventos); //con esto almaceno el array de la informacion de los usuario
-          
-        } catch (error) {
-          console.log(error);
-        }
-      };
-      obtenerDatos();
-    } else {
-      console.log("no existe un usuario");
-      //redirigir al usuario al login
-    }
-  },[]); //para que devuelva una sola vez se deja vacio
 
-  
+
+
 
   //esta parte es para el modal de compra de evento
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -63,13 +73,57 @@ export default function Eventos() {
     <div>
       <h2> Eventos Disponibles</h2>
       <div>
-        
-            <ComprarEntrada />
-    
-
-
-      </div>
       
+        <div styles={'display: inline-flex'}>
+          {eventos.map((event) => {
+            return (
+              <Card
+                hoverable
+                style={{ width: 240 }}
+                cover={
+                  <img
+                    alt="example"
+                    src={event.bannerEvento}
+                  />
+                }
+              >
+                <Meta
+                  title={event.nomEvento}
+                  description={event.fechaProgramada}
+                />
+                  <ComprarEntrada evento={event} />
+              </Card>
+            );
+          })}
+        </div>
+        <h1>Esta es una prueba con la lista de firebase</h1>
+        <div >
+        {
+          listaEventos.map((event) => {
+            return (
+              <Card
+                hoverable
+                style={{ width: 240 }}
+                cover={
+                  <img
+                    alt="example"
+                    src={event.bannerEvento}
+                  />
+                }
+              >
+                <Meta
+                  title={event.nomEvento}
+                  description='proximamente'
+                />
+                  <ComprarEntrada event={event} />
+              </Card>
+            )
+          }
+          )
+          
+          }
+        </div>
+      </div>
     </div>
   );
 }
@@ -90,7 +144,6 @@ export default function Eventos() {
                 )
             ) 
         } */
-
 
 /* 
         {

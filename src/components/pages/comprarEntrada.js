@@ -4,7 +4,7 @@ import EventoEnVivo from "./EventoEnVivo";
 import '../../css/comprarEntrada.css'
 import {db, auth} from '../firebase'
 
-export default function ComprarEntrada() {
+export default function ComprarEntrada(props) {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [loading, setLoading] = useState(false)
   const [user, setUser] = useState({});
@@ -22,23 +22,24 @@ export default function ComprarEntrada() {
   };
 
   const evento = {
-      nomEvento: 'Shakira en Vivo',
-      costoEntrada: 40,
-      descripEvento: 'Este evento digital se transmite desde Colombia para el mundo, disfruta de un momento placentero y agradable',
+      nomEvento: 'Juanes en Vivo',
+      costoEntrada: 50,
+      descripEvento: 'Este evento digital se transmite desde Ecuador para el mundo, disfruta de un momento placentero y agradable',
       urlEvento: 'https://www.youtube.com/embed/DnGdoEa1tPg',
-      fechaEvento: '2021 Marzo 31 20:00'
+      fechaEvento: '2021 Abril 28 20:00'
   }
+
   const generarCompra = async () => {
     setUser(auth.currentUser);
     console.log(user.uid)
     setLoading(true);
     await db.collection("eventosPagados").add({
-        nomEvento: evento.nomEvento,
-        costoEntrada: evento.costoEntrada,
-        descripEvento: evento.descripEvento,
-        urlEvento: evento.urlEvento,
-       uid: user.uid,
-       fechaEvento: evento.fechaEvento,
+        nomEvento: props.event.nomEvento,
+        costoEntrada: props.event.costoEntrada,
+        descripEvento: props.event.descripEvento,
+        urlEvento: props.event.urlEvento,
+       uid: user.id,
+       fechaEvento: props.event.fechaProgramada,
 
     });
     setLoading(false);
@@ -68,11 +69,11 @@ export default function ComprarEntrada() {
       >
         <div>
             <h2>Evento </h2>
-            <p>{evento.nomEvento}</p>
+            <p>{props.event.nomEvento}</p>
             <h2>Costo Evento </h2>
-            <p>{evento.costoEntrada}</p>
+            <p>{props.event.costoEntrada}</p>
             <h2>Descripción</h2>
-            <p>{evento.descripEvento}</p>
+            <p>{props.event.descripEvento}</p>
             <Button
             onClick={generarCompra}
             loading={loading}>
