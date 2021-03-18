@@ -1,0 +1,18 @@
+.botonReusable {
+    background-color: #6C141B ;
+    height: 80px;
+    margin:10px;
+    color: white;
+    text-align: center;
+    align-content: center;
+    font-size: 25px;
+   
+    margin: 0 auto;
+}
+.seccionBoton {
+    display: flex;
+    height: 400px;
+    align-items: center;
+    text-align: center;
+   
+}

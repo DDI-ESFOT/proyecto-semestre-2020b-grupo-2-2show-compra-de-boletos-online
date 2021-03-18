@@ -1,0 +1,228 @@
+#imagenPrincipal {
+    border-radius: 50px !important;
+    justify-content: center;
+    align-self: center;
+    margin: 0 auto;
+   
+    
+}
+
+#banner {
+    height: 350px;
+    background: url('../images/music2.jpg')no-repeat;
+    justify-content: center;
+    margin: 0 auto;
+   align-items: center;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    padding-top: 90px;
+   
+}
+.editFoto {
+    position: relative;
+    margin-left: 100px;
+    z-index: 1;
+    top: -30px;
+    
+}
+.editFotoB {
+    position: relative;
+    align-items: flex-end;
+    left: 600px;
+    top: -80px;
+}
+
+#contenido {
+    padding-top: 15px;
+    height: 900px;
+    background-color: rgb(46,54,76);
+    margin: 0 auto;
+    display: inline-flex;
+    justify-content: center;
+    
+   
+  
+}
+/*seccion para el blog de informacion*/
+.BloqueI {
+    background-color: white;
+    padding: 10px;
+    height: fit-content;
+    width: 30%;
+    color: white;
+    height: 800px;
+  
+    
+    
+   
+}
+.BloqueII {
+    background-color: white;
+    padding: 10px;
+    height: 800px;
+    width: 30%;
+    color: white;
+    
+    
+   
+}
+.BloqueIII{
+    background-color: white;
+    margin: 10px;
+    height: 450px;
+    width: 30%;
+    color: white;
+}
+.Bloque {
+    background-color: #6C141B ;
+    height: 80px;
+    margin:10px;
+    color: white;
+    text-align: center;
+    align-content: center;
+    
+}
+.Bloque h1 {
+    color: white;
+    font-size: 30px;
+    text-align: center;
+    align-self: center;
+    padding-top: 20px;
+    
+}
+.informacionBloque {
+    background-color: rgb(46,54,76) ;
+    height: 300px;
+    margin-top: 20px;
+    margin:10px;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    align-self: center;
+    display: flex;
+   
+}
+.informacion{
+    background-color: #6C141B ;
+    height: 250px;
+    padding: 20px;
+    margin: 10px 20px;
+    align-self: center;
+    width: 80%;
+    border: white solid 2px;
+}
+.seguidoresBloque {
+    display: inline-flex;
+    margin-top: 20px;
+    align-items: stretch;
+}
+
+.item {
+    color: white;
+    font-size: 14px;
+}
+.botonBloque {
+    margin-right: 10px;
+    background-color: rgb(46,54,76) ;
+    color: white;
+}
+
+/*#6C141B */
+
+/*bloque de eventos*/
+
+.eventoBloque {
+    background-color: rgb(46,54,76) ;
+    height: fit-content;
+    margin-left: 20px;
+    margin-right: 20px;
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    
+
+}
+.Evento {
+    color: white;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    align-self: center;
+    margin: 10px;
+    padding: 10px;
+   
+
+}
+.botonReservar{
+    background-color: #6C141B ;
+    color: white;
+    margin-left: 20px;
+
+}
+#postBloque {
+    height: 150px;
+    background-color: white;
+    margin-top: 20px;
+    display: flex;
+    align-items:flex-start;
+    align-content: center;
+    justify-content: center;
+}
+#post {
+    background-color: #6C141B;
+    height: 140px;
+    width: 100%;
+    padding-top: 30px;
+    margin-top: 20px;
+    display: flex;
+    align-content: center;
+    margin: 0 auto;
+    padding-left:25px;
+}
+#btnPostear{
+    background-color: rgb(46,54,76);
+    color: white;
+    margin-left: 20%;
+    height: 40px;
+
+}
+#inputPost {
+    background-color: #6C141B;
+    height: 60%;
+    font-size: 35px;
+    color: white;
+    font-weight: bolder;
+    border: none;
+    text-align: center;
+   
+   width: 300px;
+}
+#iconos{
+    display: flex;
+    position: relative;
+    z-index: 1;
+    right: -100px;
+    top: 10px;
+}
+
+#viewPost {
+    align-content: center;
+    align-items: center;
+    text-align: center;
+    overflow: scroll;
+    margin: 0 auto;
+    display:list-item;
+    background-color: rgb(46,54,76);
+    margin-top: 10px;
+    height: 450px;
+}
+.postN {
+    align-self: center;
+    text-align: center;
+    align-content: center;
+    margin: 0 auto;
+    width: 80%;
+}
+
