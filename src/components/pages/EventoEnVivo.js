@@ -53,6 +53,7 @@ export default function EventoEnVivo() {
                        picture-in-picture"
                 title="Evento en Vivo"
                 showinfo="0"
+                allowFullScreen
               ></iframe>
               <div className="btnBar">
                 <Button className="btnEvent" onClick={showModalDonar}>

@@ -141,7 +141,7 @@ function MyProfile(props) {
 
   return (
     <div>
-      <div id="banner" style={{ backgroundImage: `url(${infoUser.banner})` }}>
+      <div id="banner" style={{ backgroundImage: `url(${infoUser.banner})`, backgroundSize:"cover", backgroundRepeat:"no-repeat" }}>
         <h1>
           {" "}
           {infoUser.nombre} {infoUser.apellido}
