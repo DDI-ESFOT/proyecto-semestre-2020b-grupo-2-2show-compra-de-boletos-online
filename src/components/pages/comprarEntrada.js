@@ -1,8 +1,13 @@
 import React, { useState } from "react";
 import { Modal, Button } from "antd";
+import EventoEnVivo from "./EventoEnVivo";
+import '../../css/comprarEntrada.css'
+import {db, auth} from '../firebase'
 
 export default function ComprarEntrada() {
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [loading, setLoading] = useState(false)
+  const [user, setUser] = useState({});
 
   const showModal = () => {
     setIsModalVisible(true);
@@ -16,6 +21,36 @@ export default function ComprarEntrada() {
     setIsModalVisible(false);
   };
 
+  const evento = {
+      nomEvento: 'Shakira en Vivo',
+      costoEntrada: 40,
+      descripEvento: 'Este evento digital se transmite desde Colombia para el mundo, disfruta de un momento placentero y agradable',
+      urlEvento: 'https://www.youtube.com/embed/DnGdoEa1tPg',
+      fechaEvento: '2021 Marzo 31 20:00'
+  }
+  const generarCompra = async () => {
+    setUser(auth.currentUser);
+    console.log(user.uid)
+    setLoading(true);
+    await db.collection("eventosPagados").add({
+        nomEvento: evento.nomEvento,
+        costoEntrada: evento.costoEntrada,
+        descripEvento: evento.descripEvento,
+        urlEvento: evento.urlEvento,
+       uid: '6RTpVJCMN0TzvhcTo0bTUZASU9I2',
+       fechaEvento: evento.fechaEvento,
+
+    });
+    setLoading(false);
+    console.log('evento agregado con exito!!');
+
+
+  }
+  
+
+
+
+
   return (
     <div>
       
@@ -23,14 +58,28 @@ export default function ComprarEntrada() {
         Comprar Entrada
       </Button>
       <Modal
-        title="Basic Modal"
+        title="Comprar Entrada"
         visible={isModalVisible}
         onOk={handleOk}
         onCancel={handleCancel}
+      
+        onOK={generarCompra}
+        
       >
-        <p>Some contents...</p>
-        <p>Some contents...</p>
-        <p>Some contents...</p>
+        <div>
+            <h2>Evento </h2>
+            <p>{evento.nomEvento}</p>
+            <h2>Costo Evento </h2>
+            <p>{evento.costoEntrada}</p>
+            <h2>Descripción</h2>
+            <p>{evento.descripEvento}</p>
+            <Button
+            onClick={generarCompra}
+            loading={loading}>
+                Comprar
+            </Button>
+            
+        </div>
       </Modal>
     </div>
   );

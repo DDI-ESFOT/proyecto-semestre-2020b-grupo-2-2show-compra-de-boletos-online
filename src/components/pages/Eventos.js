@@ -22,15 +22,11 @@ export default function Eventos() {
      
       const obtenerDatos = async () => {
         try {
-          const data = await db.collection("eventos").get(); //poner doc(user.email) escoje directo, usar solo usuario, usar ingles PONER
-          //const data = await db.collection("infoUser").doc(user.email).get();
-          //console.log(data.docs)
+          const data = await db.collection("eventos").get(); 
           const arrayEventos = await data.docs.map((doc) => ({
             id: doc.id,
             ...doc.data(),
           }));
-          
-          
 
           setEventos( await arrayEventos); //aqui tengo todos los eventos
           console.log('eventos',eventos); //con esto almaceno el array de la informacion de los usuario
@@ -44,7 +40,7 @@ export default function Eventos() {
       console.log("no existe un usuario");
       //redirigir al usuario al login
     }
-  },[eventos]); //para que devuelva una sola vez se deja vacio
+  },[]); //para que devuelva una sola vez se deja vacio
 
   
 
@@ -68,7 +64,7 @@ export default function Eventos() {
       <h2> Eventos Disponibles</h2>
       <div>
         
-            
+            <ComprarEntrada />
     
 
 
