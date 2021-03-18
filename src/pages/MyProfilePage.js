@@ -3,19 +3,19 @@ import { auth, db } from "../firebase";
 import { withRouter } from "react-router";
 import "../Styles/myProfile.css";
 //importo Ant para poder usar sus componentes
-import { Row, Col, Input, Image, Button, Card } from "antd";
-
-import Post from "../components/Post";
-
-//importar iconos
+import { Row, Col, Input, Image, Button, Card, Modal } from "antd";
 import {
   UploadOutlined,
-  EditOutlined,
   HeartOutlined,
   FormOutlined,
+  EditOutlined,
 } from "@ant-design/icons";
-import Routes from "../constants/routes";
-import { NavLink } from "react-router-dom";
+
+//importar iconos
+
+//import evento en vivo
+import EventoEnVivo from "../components/EventoEnVivo";
+import Routers from "../constants/routes";
 
 function MyProfilePage(props) {
   //state del usuario vigente, el autenticado
@@ -90,6 +90,32 @@ function MyProfilePage(props) {
     obtenerPost();
   }, []);
 
+  //obtener evento pagados
+  const [eventosPagados, setEventosPagados] = React.useState([]);
+  React.useEffect(() => {
+    //cargo la coleccion de posts
+
+    const obtenerEventosPagados = () => {
+      try {
+        db.collection("eventosPagados")
+          .where("uid", "==", props.firebaseUser.uid)
+          .onSnapshot((querySnapshot) => {
+            const eventosPagados = [];
+            querySnapshot.forEach((doc) => {
+              eventosPagados.push({
+                id: doc.id,
+                ...doc.data(),
+              });
+            });
+            console.log("Current Eventos Pagados: ", eventosPagados.join(", "));
+            console.log("Current Eventos Pagados: ", eventosPagados);
+            setEventosPagados(eventosPagados);
+          });
+      } catch (error) {}
+    };
+    obtenerEventosPagados();
+  }, []);
+
   const { Meta } = Card;
 
   //funcion para subir el post
@@ -139,6 +165,21 @@ function MyProfilePage(props) {
       });
     //guardar base de datos
     //
+  };
+
+  //modal para ver el evento
+  const [isModalVisible, setIsModalVisible] = useState(false);
+
+  const showModal = () => {
+    setIsModalVisible(true);
+  };
+
+  const handleOk = () => {
+    setIsModalVisible(false);
+  };
+
+  const handleCancel = () => {
+    setIsModalVisible(false);
   };
 
   return (
@@ -257,12 +298,31 @@ function MyProfilePage(props) {
           <div className="eventoBloque">
             <div className="Evento">
               <div>
-                <p>
-                  {" "}
-                  <b>Shakira </b> Sábado 9 pm{" "}
-                </p>
+                {eventosPagados.map((eventoPagado) => {
+                  return (
+                    <div>
+                      <p>{eventoPagado.nomEvento}</p>
+                      <p>{eventoPagado.fechaEvento}</p>
+                      <Button className="botonReservar" onClick={showModal}>
+                        Ingresar
+                      </Button>
+
+                      <Modal
+                        visible={isModalVisible}
+                        onOk={handleOk}
+                        onCancel={handleCancel}
+                        footer={null}
+                        width="100%"
+                        height="100%"
+                      >
+                        <div>
+                          <EventoEnVivo eventoPagado={eventoPagado} />
+                        </div>
+                      </Modal>
+                    </div>
+                  );
+                })}
               </div>
-              <Button className="botonReservar">Ingresar</Button>
             </div>
           </div>
 
@@ -281,10 +341,10 @@ function MyProfilePage(props) {
             </div>
             <Button
               type="primary"
-              href="/crearEvento"
+              href={Routers.CREATEEVENTS}
               className="botonReusable"
             >
-              <NavLink to={Routes.CREATEEVENTS}>Crear evento</NavLink>
+              Crear Evento
             </Button>
           </div>
           <div className="eventoBloque">
@@ -297,10 +357,6 @@ function MyProfilePage(props) {
               </div>
               <Button className="botonReservar">Reservar</Button>
             </div>
-          </div>
-
-          <div className="Bloque">
-            <h1>Anuncios</h1>
           </div>
         </Col>
       </Row>
