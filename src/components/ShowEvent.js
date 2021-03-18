@@ -44,28 +44,6 @@ function ShowEvents() {
           <p>La mejor música con los mejores artistas en vivo desde tu casa!</p>
         </div>
         <Row gutter={[16, 16]}>
-          <div>
-            {events.map((oneevent) => {
-              return (
-                <Col xs={{ span: 24 }} sm={{ span: 12 }} md={{ span: 8 }}>
-                  <Card
-                    hoverable
-                    cover={<img alt="Test" src={oneevent.bannerEvento} />}
-                  >
-                    <Meta title={oneevent.nomEvento} />
-                    <p>{oneevent.fechaProgramada}</p>
-                    <p>{oneevent.descripEvento}</p>
-                    <p>Card content</p>
-                    <Button type="primary" htmlType="submit">
-                      Comprar evento
-                    </Button>
-                  </Card>
-                </Col>
-              );
-            })}
-          </div>
-        </Row>
-        <Row gutter={[16, 16]}>
           <Col xs={{ span: 24 }} sm={{ span: 12 }} md={{ span: 8 }}>
             <Card hoverable cover={<img alt="Test" src={image1} />}>
               <Meta title="Easy to customise" />

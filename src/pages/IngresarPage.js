@@ -3,9 +3,8 @@ import { withRouter } from "react-router-dom";
 import { auth, db } from "../firebase";
 
 //importo el datapicker
-import { Form, Input, DatePicker, Space, Button } from "antd";
+import { Form, Input, DatePicker, Space } from "antd";
 import Routers from "../constants/routes";
-import Checkbox from "antd/es/checkbox/Checkbox";
 
 function IngresarPage(props) {
   const [email, setEmail] = React.useState("");

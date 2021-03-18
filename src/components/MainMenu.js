@@ -46,6 +46,7 @@ function MainMenu(props) {
             ) : (
               <NavLink to={Routes.LOGIN}>Ingresar</NavLink>
             )}
+            <NavLink to={Routes.CREATEEVENTS}>Crear evento</NavLink>
           </Anchor>
         </div>
         <div className="mobileVisible">
@@ -72,6 +73,7 @@ function MainMenu(props) {
               ) : (
                 <NavLink to={Routes.LOGIN}>Ingresar</NavLink>
               )}
+              <NavLink to={Routes.CREATEEVENTS}>Crear evento</NavLink>
             </Anchor>
           </Drawer>
         </div>

@@ -55,6 +55,9 @@ function App() {
             <Route path={Routers.HOME} exact="true">
               <HomePage />
             </Route>
+            <Router path={Routers.CREATEEVENTS}>
+              <CreateEventPage firebaseUser={firebaseUser} />
+            </Router>
             <Route>
               <NotFoundPage />
             </Route>

@@ -3,9 +3,8 @@ import { auth, db } from "../firebase";
 import { Menu, Row, Col, Input, Image, Button, Card } from "antd";
 import "../Styles/crearEvento.css";
 
-import iconoEditar from "../images/editar.png";
-import iconoEditar2 from "../images/editar.png";
 import FormEvents from "../components/FormEvents";
+import { EditOutlined, FormOutlined } from "@ant-design/icons";
 
 function CreateEventPage(props) {
   const [infoUser, setInfoUser] = React.useState("");
@@ -28,9 +27,8 @@ function CreateEventPage(props) {
           const filtrado = arrayDatos.filter(
             (dato) => dato.uid === props.firebaseUser.uid
           ); //esto hago para solo coger el objeto con cohincida con los datos del usuario loggeado
-
           setInfoUser(filtrado[0]); //asigno el objeto al usuario
-          //console.log(infoUser);
+          console.log(infoUser);
         } catch (error) {
           console.log(error);
         }
@@ -39,7 +37,7 @@ function CreateEventPage(props) {
     } else {
       console.log("no existe un usuario");
       //redirigir al usuario al login
-      props.history.push("/ingresar");
+      //props.history.push("/ingresar");
     }
   }, [props.history, infoUser.uid]);
 
@@ -57,21 +55,14 @@ function CreateEventPage(props) {
           width={250}
           height={250}
           preview={false}
+          className="img-circle"
         />
-        <Image
-          className="editFoto"
-          src={iconoEditar}
-          width={50}
-          height={50}
-          preview={false}
-        />
-        <Image
-          className="editFotoB"
-          src={iconoEditar2}
-          width={50}
-          height={50}
-          preview={false}
-        />
+        <div className="editFoto">
+          <FormOutlined style={{ fontSize: "30x", color: "red" }} />
+        </div>
+        <div className="editFotoB">
+          <EditOutlined style={{ fontSize: "25px", color: "red" }} />
+        </div>
       </div>
 
       <Row className="container">
@@ -79,18 +70,9 @@ function CreateEventPage(props) {
           <div className="Bloque">
             <h1>Crear Eventos</h1>
           </div>
-
-          <FormEvents />
         </Col>
-        <Col xs={24} sm={24} md={8} lg={8} xl={8} className="seccionBoton">
-          <Button
-            onClick={() => {
-              console.log("ir a vista previa");
-            }}
-            className="botonReusable"
-          >
-            Vista Previa
-          </Button>
+        <Col xs={24} sm={24} md={8} lg={8} xl={8}>
+          <FormEvents infoUser={infoUser} />
         </Col>
         <Col xs={24} sm={24} md={8} lg={8} xl={8}>
           <div className="Bloque">

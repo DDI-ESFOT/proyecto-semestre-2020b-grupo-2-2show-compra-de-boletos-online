@@ -14,6 +14,8 @@ import {
   HeartOutlined,
   FormOutlined,
 } from "@ant-design/icons";
+import Routes from "../constants/routes";
+import { NavLink } from "react-router-dom";
 
 function MyProfilePage(props) {
   //state del usuario vigente, el autenticado
@@ -282,7 +284,7 @@ function MyProfilePage(props) {
               href="/crearEvento"
               className="botonReusable"
             >
-              Crear Evento
+              <NavLink to={Routes.CREATEEVENTS}>Crear evento</NavLink>
             </Button>
           </div>
           <div className="eventoBloque">
