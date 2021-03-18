@@ -1,38 +1,195 @@
-.App {
+/*
+Page
+-------
+*/
+.imagenlogo{
+  width: 60px;
+  height: 40px;
+}
+body {
+  font-size: 16px;
+  line-height: 1.6;
+  color: #333;
+  overflow-x: hidden;
+}
+
+.container-fluid {
+  margin: 0 auto;
+  max-width: 1200px;
+  padding: 0 15px;
+}
+
+.ant-layout {
+  background: #fff !important;
+  min-height: 100vh;
+}
+
+.ant-layout-content {
+  margin-top: 100px;
+  background-color: #bdbcba !important;
+}
+
+.mainLayout .ant-layout-header {
+  background: #f8f8f8 ;
+  padding: 0;
+  height: auto;
+  line-height: 1.6;
+}
+
+p {
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.bgGray {
+  background: #fafafa;
+}
+
+/*
+title holder
+------------
+*/
+.titleHolder {
+  text-align: center;
+  position: relative;
+  padding: 0 0 20px;
+  margin: 0 0 40px;
+}
+
+.titleHolder:after {
+  transform: translateX(-50%);
+  content: '';
+  background: firebrick!important;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  height: 3px;
+  width: 50px;
+}
+
+.titleHolder h2 {
+  font-size: 28px;
+  margin: 0;
+}
+
+
+/*
+footer
+------
+*/
+.ant-layout-footer {
+  background: midnightblue!important;
+  color: #fff !important;
+  padding: 60px 0 !important;
+  text-align: center;
+}
+.ant-layout-footer .container-fluid{
+  margin-top: -41px;
+  height: 100px;
+}
+
+.footer .logo {
+  font-size: 22px;
+  text-transform: uppercase;
+  margin: 0 0 20px;
+}
+
+.footer .fas {
+  color:firebrick!important;
+  font-size: 28px;
+  margin: 0 5px 0 0;
+}
+
+.footer .logo a {
+  color: #fff;
+}
+
+.footer .socials {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  font-size: 24px;
+}
+
+.footer .socials li {
+  margin: 0 20px;
+}
+
+.footer .socials a {
+  color: #fff;
+}
+
+.footer .socials a:hover {
+  color: firebrick!important;
+}
+
+.footer .goTop:hover {
+  opacity: 0.7;
+}
+
+.mobileVisible {
+  display: none;
+}
+
+.mobileHidden {
+  display: block;
+}
+/*
+Ingresar Page
+*/
+
+.alertlogin{
+  color: firebrick!important;
+  margin: 0 auto;
+  text-align: center;
+  margin-bottom: 10px;
+}
+.titulologin{
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/*Spinner*/
+.containerspidder{
+  text-align: center;
+  height: 1000px;
+}
+.ant-spin-nested-loading {
+  height: 100%;
+}
+.ant-alert-with-description.ant-alert-no-icon {
+  color:firebrick!important;
+  height: 100%;
+}
+.ant-alert-with-description .ant-alert-message{
+  color:red;
+  margin-top: 100px;
+}
+.ant-spin-blur{
+  height: 100%;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+/*
+responsive
+----------
+*/
+@media only screen and (max-width: 991px) {
+  .pricingBlock .ant-row > div:nth-child(2) .ant-list-item {
+    transform: scale(1.14);
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+@media only screen and (max-width: 767px) {
+  .pricingBlock .ant-row > div:nth-child(2) .ant-list-item {
+    transform: scale(1);
   }
-  to {
-    transform: rotate(360deg);
+
+  .mobileVisible {
+    display: block;
+  }
+
+  .mobileHidden {
+    display: none;
   }
 }
