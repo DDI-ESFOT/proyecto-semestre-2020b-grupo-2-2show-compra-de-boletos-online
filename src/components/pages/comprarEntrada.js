@@ -37,7 +37,7 @@ export default function ComprarEntrada() {
         costoEntrada: evento.costoEntrada,
         descripEvento: evento.descripEvento,
         urlEvento: evento.urlEvento,
-       uid: '6RTpVJCMN0TzvhcTo0bTUZASU9I2',
+       uid: user.uid,
        fechaEvento: evento.fechaEvento,
 
     });
