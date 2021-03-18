@@ -37,9 +37,13 @@ function MainMenu(props) {
           <Anchor targetOffset="65">
             <NavLink to={Routes.HOME}>Home</NavLink>
             <NavLink to={Routes.ABOUT}>Nosotros</NavLink>
-            <NavLink to={Routes.EVENT}>Eventos</NavLink>
+            <NavLink to={Routes.EVENT} activeClassName="active">
+              Eventos
+            </NavLink>
             {props.firebaseUser !== null ? (
-              <NavLink to={Routes.MYPROFILE}>Mi Perfil</NavLink>
+              <NavLink to={Routes.MYPROFILE} activeClassName="active">
+                Mi Perfil
+              </NavLink>
             ) : null}
             {props.firebaseUser !== null ? (
               <Button onClick={() => cerrarSesion()}>Salir</Button>
@@ -62,16 +66,18 @@ function MainMenu(props) {
             <Anchor targetOffset="65">
               <NavLink to={Routes.HOME}>Home</NavLink>
               <NavLink to={Routes.ABOUT}>Nosotros</NavLink>
-              <NavLink to={Routes.EVENT}>Eventos</NavLink>
+              <NavLink to={Routes.EVENT} activeClassName="active">
+                Eventos
+              </NavLink>
               {props.firebaseUser !== null ? (
                 <NavLink to={Routes.MYPROFILE} activeClassName="active">
                   Mi Perfil
                 </NavLink>
               ) : null}
               {props.firebaseUser !== null ? (
-                <Button onClick={() => cerrarSesion()}>Log Out</Button>
-              ) : (
                 <NavLink to={Routes.LOGIN}>Ingresar</NavLink>
+              ) : (
+                <Button onClick={() => cerrarSesion()}>Log Out</Button>
               )}
               <NavLink to={Routes.CREATEEVENTS}>Crear evento</NavLink>
             </Anchor>
