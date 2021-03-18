@@ -10,9 +10,32 @@ import image6 from "../images/imagenF.jpg";
 
 import { Row, Col, Button } from "antd";
 import { Card } from "antd";
+import { db } from "../firebase";
 const { Meta } = Card;
 
 function ShowEvents() {
+  const [events, setEvents] = useState("");
+  useEffect(() => {
+    //cargo la coleccion de eventos
+    const getEvents = async () => {
+      try {
+        db.collection("eventos").onSnapshot((querySnapshot) => {
+          const eventlist = [];
+          querySnapshot.forEach((doc) => {
+            eventlist.push({
+              id: doc.id,
+              ...doc.data(),
+            });
+          });
+          console.log("Current Events: ", eventlist.join(", "));
+          setEvents(eventlist);
+          console.log(events);
+        });
+      } catch (error) {}
+    };
+    getEvents();
+  }, []);
+
   return (
     <div id="feature" className="block featureBlock bgGray">
       <div className="container-fluid">
@@ -20,6 +43,28 @@ function ShowEvents() {
           <h2>Escoge tu evento favorito</h2>
           <p>La mejor música con los mejores artistas en vivo desde tu casa!</p>
         </div>
+        <Row gutter={[16, 16]}>
+          <div>
+            {events.map((oneevent) => {
+              return (
+                <Col xs={{ span: 24 }} sm={{ span: 12 }} md={{ span: 8 }}>
+                  <Card
+                    hoverable
+                    cover={<img alt="Test" src={oneevent.bannerEvento} />}
+                  >
+                    <Meta title={oneevent.nomEvento} />
+                    <p>{oneevent.fechaProgramada}</p>
+                    <p>{oneevent.descripEvento}</p>
+                    <p>Card content</p>
+                    <Button type="primary" htmlType="submit">
+                      Comprar evento
+                    </Button>
+                  </Card>
+                </Col>
+              );
+            })}
+          </div>
+        </Row>
         <Row gutter={[16, 16]}>
           <Col xs={{ span: 24 }} sm={{ span: 12 }} md={{ span: 8 }}>
             <Card hoverable cover={<img alt="Test" src={image1} />}>
