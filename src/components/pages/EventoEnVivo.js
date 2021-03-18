@@ -2,7 +2,7 @@ import { Button, Modal } from "antd";
 import React, { useState } from "react";
 import "../../css/EventoEnVivo.css";
 
-export default function EventoEnVivo() {
+export default function EventoEnVivo(props) {
   const [loading, setLoading] = useState("false");
   const [urlEvento, setUrlEvento] = useState(
     "https://www.youtube.com/embed/bgZHX_olZeI"
@@ -47,7 +47,7 @@ export default function EventoEnVivo() {
               <iframe
                 width="100%"
                 height="570px"
-                src="https://www.youtube.com/embed/Rg3_vTMFc8I"
+                src={props.eventoPagado.urlEvento}
                 frameborder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; 
                        picture-in-picture"

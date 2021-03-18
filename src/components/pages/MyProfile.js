@@ -322,7 +322,7 @@ function MyProfile(props) {
                         height="100%"
                       >
                         <div>
-                        <EventoEnVivo />
+                        <EventoEnVivo eventoPagado={eventoPagado}/>
                         </div>
                         
                       </Modal>
